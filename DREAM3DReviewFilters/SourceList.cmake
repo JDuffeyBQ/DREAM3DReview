@@ -81,6 +81,8 @@ set(_PublicFilters
   FindCSLBoundaries
   InsertTransformationPhases
   TiDwellFatigueCrystallographicAnalysis
+
+  ReadDicondeFile
 )
 
 list(LENGTH _PublicFilters PluginNumFilters)
