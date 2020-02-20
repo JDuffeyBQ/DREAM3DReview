@@ -1,54 +1,43 @@
-# Read HEDM Data (.mic)  #
-
+# Read DICONDE File #
 
 ## Group (Subgroup) ##
 
-IOFilters (Input)
-
+DREAM3DReview (IO)
 
 ## Description ##
 
-This filter will read a single .mic file into the VoxelDataContainer allowing the immediate use of filters on the data instead of having to generate the intermediate .h5ebsd file. The user should be aware that simply reading the file then performing operations that are dependent on the proper crystallographic and sample reference frame will be undefined or simply **wrong**. In order to bring the crystal reference frame and sample reference frame into coincidence the proper filters need to be run. The user should read the documentation for the "[Rotate Sample Reference Frame](rotatesamplerefframe.html)" and "[Rotate Euler Reference Frame](rotateeulerrefframe.html)".
- 
-The user also may want to assign unindexed pixels to be ignored and be assigned an RGB Color of Black. In this case the user can insert the [Single Threshold (Cell Data) Filter](singlethresholdcells.html) to define the "Good Voxels" cell data. For HKL data the "Error" column defines each point as being properly indexed (Value = 0) or an error occurred and the point was not indexed (Value > 0). 
+This filter will read a DICOM/DICONDE file and extract its image data into a DataArray of appropriate type and size. This filter creates a DataContainer with a 2D geometry for the image along with the appropriate AttributeMatrix.
 
 ## Parameters ##
 
-| Name             | Type |
-|------------------|------|
-| Input File | The Path to the .ang or .ctf file |
+| Name | Type | Description |
+|------|------|------|
+| Input File | Path | Input file path |
+| Created Geometry | String | Created DataContainer name |
 
-## Required Arrays ##
+## Required Geometry ##
 
-None
+N/A
 
-## Required DataContainers ##
+## Required Objects ##
 
-Voxel
+N/A
 
+## Created Objects ##
 
-## Created Arrays ##
+| Kind | Default Name | Type | Component Dimensions | Description |
+|------|--------------|------|----------------------|-------------|
+| **DataContainer** | "DataContainer" | ImageGeometry | N/A | Contains the ImageGeometry of DICONDE file |
+| **AttributeMatrix** | "CellData" | Cell | N/A | Contains the DataArray of image data |
+| **DataArray** | "DicondeData" | uint8 / int8 / uint16 / int16 / uint32 / int32 | 1 | Image data |
 
-Arrays are created based on the data read from the EBSD file.
+## Example Pipelines ##
 
+## License & Copyright ##
 
-| Type | Default Array Name | Description | Comment |
-|------|--------------------|-------------|---------|
-| Int  | SomeName           | ....        | other   |
+Please see the description file distributed with this plugin.
 
+## DREAM3D Mailing Lists ##
 
-
-## Authors ##
-
-**Copyright** 2015 BlueQuartz Software
-
-**Contact Info** dream3d@bluequartz.net
-
-**Version** 1.0.0
-
-**License**  See the License.txt file that came with DREAM3D.
-
-
-
-See a bug? Does this documentation need updated with a citation? Send comments, corrections and additions to [The DREAM3D development team](mailto:dream3d@bluequartz.net?subject=Documentation%20Correction)
-
+If you need more help with a filter, please consider asking your question on the DREAM3D Users mailing list:
+https://groups.google.com/forum/?hl=en#!forum/dream3d-users
