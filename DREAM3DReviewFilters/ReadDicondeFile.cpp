@@ -158,7 +158,7 @@ void ReadDicondeFile::setupFilterParameters()
 {
   FilterParameterVectorType parameters;
 
-  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ReadDicondeFile, ".dcm", "DICONDE"));
+  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ReadDicondeFile, "*.dcm", "DICONDE"));
   parameters.push_back(SIMPL_NEW_DC_CREATION_FP("Created Geometry", DataContainerPath, FilterParameter::Category::CreatedArray, ReadDicondeFile));
 
   setFilterParameters(parameters);
@@ -229,13 +229,12 @@ void ReadDicondeFile::dataCheck()
     return;
   }
 
-  FloatVec3Type spacing;
+  FloatVec3Type spacing(1.0f, 1.0f, 1.0f);
 
   if(!::getSpacing(*dataset, spacing))
   {
-    QString ss = QObject::tr("Unable to get spacing from DICONDE dataset");
-    setErrorCondition(-6, ss);
-    return;
+    QString ss = QObject::tr("Unable to get spacing from DICONDE dataset. Assuming [1.0f, 1.0f]");
+    setWarningCondition(-6, ss);
   }
 
   DicomImage image(&file, E_TransferSyntax::EXS_Unknown);
