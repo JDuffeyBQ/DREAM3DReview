@@ -244,36 +244,12 @@ PluginProperties(TARGET_NAME ${plug_target_name}
                 INSTALL_DEST "${${plug_target_name}_install_dest}"
 )
 
-find_package(DCMTK REQUIRED)
-
-set_target_properties(dcmimgle PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${DCMTK_INCLUDE_DIR})
-
-function(CopyDLL)
-  set(options)
-  set(oneValueArgs SRC DST)
-  set(multiValueArgs)
-  cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-  add_custom_command(TARGET ${ARG_DST}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    $<$<CONFIG:debug>:$<TARGET_PROPERTY:${ARG_SRC},IMPORTED_LOCATION_DEBUG>>$<$<CONFIG:release>:$<TARGET_PROPERTY:${ARG_SRC},IMPORTED_LOCATION_RELEASE>>
-    $<TARGET_FILE_DIR:${ARG_DST}>
-    COMMENT "Copying ${ARG_SRC} dll\n"
-  )
-endfunction()
-
-CopyDLL(SRC dcmimgle DST ${plug_target_name})
-CopyDLL(SRC dcmdata DST ${plug_target_name})
-CopyDLL(SRC oflog DST ${plug_target_name})
-CopyDLL(SRC ofstd DST ${plug_target_name})
-
 target_link_libraries(${plug_target_name}
                     Qt5::Core
                     SIMPLib
                     EbsdLib
                     ${ITK_LIBRARIES}
-                    dcmimgle
+                    gdcmMSFF
 )
 
 # -------------------------------------------------------------------- 

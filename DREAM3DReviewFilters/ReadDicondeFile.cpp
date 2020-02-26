@@ -45,9 +45,7 @@
 
 #include <QtCore/QFileInfo>
 
-#include "dcmtk/dcmdata/dcdeftag.h"
-#include "dcmtk/dcmdata/dcfilefo.h"
-#include "dcmtk/dcmimgle/dcmimage.h"
+#include "gdcmImageReader.h"
 
 namespace
 {
@@ -55,70 +53,6 @@ enum createdPathID : RenameDataPath::DataID_t
 {
   DataContainerID = 1
 };
-
-size_t sizeOfRepresentation(EP_Representation representation)
-{
-  switch(representation)
-  {
-  case EP_Representation::EPR_Uint8:
-    return sizeof(uint8_t);
-  case EP_Representation::EPR_Sint8:
-    return sizeof(int8_t);
-  case EP_Representation::EPR_Uint16:
-    return sizeof(uint16_t);
-  case EP_Representation::EPR_Sint16:
-    return sizeof(int16_t);
-  case EP_Representation::EPR_Uint32:
-    return sizeof(uint32_t);
-  case EP_Representation::EPR_Sint32:
-    return sizeof(int32_t);
-  default:
-    return 0;
-  }
-}
-
-bool getSpacing(DcmDataset& dataset, FloatVec3Type& spacing)
-{
-  OFString dcmSpacing;
-
-  OFCondition found = dataset.findAndGetOFStringArray(DCM_PixelSpacing, dcmSpacing, 1);
-
-  if(found.bad())
-  {
-    return false;
-  }
-
-  QString spacingStr(dcmSpacing.c_str());
-
-  QStringList spacingParts = spacingStr.split('\\');
-
-  if(spacingParts.size() != 2)
-  {
-    return false;
-  }
-
-  bool ok = false;
-
-  float xSpacing = spacingParts[0].toFloat(&ok);
-
-  if(!ok)
-  {
-    return false;
-  }
-
-  float ySpacing = spacingParts[1].toFloat(&ok);
-
-  if(!ok)
-  {
-    return false;
-  }
-
-  spacing.setX(xSpacing);
-  spacing.setY(ySpacing);
-  spacing.setZ(1.0f);
-
-  return true;
-}
 } // namespace
 
 struct ReadDicondeFile::Impl
@@ -158,7 +92,7 @@ void ReadDicondeFile::setupFilterParameters()
 {
   FilterParameterVectorType parameters;
 
-  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ReadDicondeFile, "*.dcm", "DICONDE"));
+  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ReadDicondeFile, "*.dcm", "DICOM/DICONDE"));
   parameters.push_back(SIMPL_NEW_DC_CREATION_FP("Created Geometry", DataContainerPath, FilterParameter::Category::CreatedArray, ReadDicondeFile));
 
   setFilterParameters(parameters);
@@ -209,68 +143,45 @@ void ReadDicondeFile::dataCheck()
     return;
   }
 
-  DcmFileFormat file;
+  gdcm::ImageReader imageReader;
 
-  OFCondition status = file.loadFile(m_InputFilePath.toStdString().c_str());
+  imageReader.SetFileName(m_InputFilePath.toStdString().c_str());
 
-  if(status.bad())
+  if(!imageReader.Read())
   {
-    QString ss = QObject::tr("Unable to open DICONDE file");
+    QString ss = QObject::tr("Unable to open .DCM file");
     setErrorCondition(-4, ss);
     return;
   }
 
-  DcmDataset* dataset = file.getDataset();
+  gdcm::Image image = imageReader.GetImage();
 
-  if(dataset == nullptr)
+  size_t size = image.GetBufferLength();
+
+  gdcm::PixelFormat::ScalarType type = image.GetPixelFormat().GetScalarType();
+
+  FloatVec3Type spacing;
+  FloatVec3Type origin;
+  std::vector<size_t> dims(3, 0);
+
+  for(size_t i = 0; i < 3; i++)
   {
-    QString ss = QObject::tr("Unable to get DICONDE dataset");
-    setErrorCondition(-5, ss);
-    return;
+    spacing[i] = static_cast<float>(image.GetSpacing(i));
+    origin[i] = static_cast<float>(image.GetOrigin(i));
+    dims[i] = static_cast<size_t>(image.GetDimension(i));
   }
-
-  FloatVec3Type spacing(1.0f, 1.0f, 1.0f);
-
-  if(!::getSpacing(*dataset, spacing))
-  {
-    QString ss = QObject::tr("Unable to get spacing from DICONDE dataset. Assuming [1.0f, 1.0f]");
-    setWarningCondition(-6, ss);
-  }
-
-  DicomImage image(&file, E_TransferSyntax::EXS_Unknown);
-  if(image.getStatus() != EI_Status::EIS_Normal)
-  {
-    QString ss = QObject::tr("Unable to open image from DICONDE dataset");
-    setErrorCondition(-7, ss);
-    return;
-  }
-
-  const DiPixel* pixels = image.getInterData();
-
-  if(pixels == nullptr)
-  {
-    QString ss = QObject::tr("Unable to get pixel representation from DICONDE dataset");
-    setErrorCondition(-8, ss);
-    return;
-  }
-
-  uint32_t height = image.getHeight();
-  uint32_t width = image.getWidth();
-  EP_Representation representation = pixels->getRepresentation();
-
-  std::vector<size_t> dims{static_cast<size_t>(width), static_cast<size_t>(height)};
 
   ImageGeom::Pointer imageGeom = ImageGeom::CreateGeometry("ImageGeom");
 
   if(imageGeom == nullptr)
   {
     QString ss = QObject::tr("Unable to create ImageGeometry");
-    setErrorCondition(-9, ss);
+    setErrorCondition(-6, ss);
     return;
   }
 
-  imageGeom->setDimensions(dims[0], dims[1], 1);
-  imageGeom->setOrigin(0.0f, 0.0f, 0.0f);
+  imageGeom->setDimensions(dims);
+  imageGeom->setOrigin(origin);
   imageGeom->setSpacing(spacing);
 
   imageGeom->setUnits(IGeometry::LengthUnit::Millimeter);
@@ -283,32 +194,32 @@ void ReadDicondeFile::dataCheck()
     return;
   }
 
-  QString dataArrayName("DicondeData");
-  std::vector<size_t> cDims{1};
+  const QString dataArrayName("Data");
+  const std::vector<size_t> cDims{1};
 
-  switch(representation)
+  switch(type)
   {
-  case EP_Representation::EPR_Uint8:
+  case gdcm::PixelFormat::ScalarType::UINT8:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt8ArrayType, AbstractFilter, uint8_t>(this, dataArrayName, 0, cDims);
     break;
-  case EP_Representation::EPR_Sint8:
+  case gdcm::PixelFormat::ScalarType::INT8:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<Int8ArrayType, AbstractFilter, int8_t>(this, dataArrayName, 0, cDims);
     break;
-  case EP_Representation::EPR_Uint16:
+  case gdcm::PixelFormat::ScalarType::UINT16:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt16ArrayType, AbstractFilter, uint16_t>(this, dataArrayName, 0, cDims);
     break;
-  case EP_Representation::EPR_Sint16:
+  case gdcm::PixelFormat::ScalarType::INT16:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<Int16ArrayType, AbstractFilter, int16_t>(this, dataArrayName, 0, cDims);
     break;
-  case EP_Representation::EPR_Uint32:
+  case gdcm::PixelFormat::ScalarType::UINT32:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt32ArrayType, AbstractFilter, uint32_t>(this, dataArrayName, 0, cDims);
     break;
-  case EP_Representation::EPR_Sint32:
+  case gdcm::PixelFormat::ScalarType::INT32:
     p_Impl->m_DataArray = matrix->createNonPrereqArray<Int32ArrayType, AbstractFilter, int32_t>(this, dataArrayName, 0, cDims);
     break;
   default: {
     QString ss = QObject::tr("Invalid image representation type");
-    setErrorCondition(-10, ss);
+    setErrorCondition(-7, ss);
   }
     return;
   }
@@ -350,46 +261,49 @@ void ReadDicondeFile::execute()
     return;
   }
 
-  DicomImage image(m_InputFilePath.toStdString().c_str());
-  if(image.getStatus() != EI_Status::EIS_Normal)
+  gdcm::ImageReader imageReader;
+
+  imageReader.SetFileName(m_InputFilePath.toStdString().c_str());
+
+  if(!imageReader.Read())
   {
-    QString ss = QObject::tr("Unable to open image from DICONDE dataset");
-    setErrorCondition(-12, ss);
+    QString ss = QObject::tr("Unable to open .DCM file");
+    setErrorCondition(-8, ss);
     return;
   }
 
-  const DiPixel* pixels = image.getInterData();
+  gdcm::Image image = imageReader.GetImage();
 
-  if(pixels == nullptr)
+  size_t size = image.GetBufferLength();
+
+  std::vector<char> buffer(size, '\0');
+
+  if(!image.GetBuffer(buffer.data()))
   {
-    QString ss = QObject::tr("Unable to get pixel representation from DICONDE dataset");
-    setErrorCondition(-13, ss);
+    QString ss = QObject::tr("Unable to get image data");
+    setErrorCondition(-9, ss);
     return;
   }
 
-  size_t count = pixels->getCount();
-  EP_Representation representation = pixels->getRepresentation();
-  size_t typeSize = sizeOfRepresentation(representation);
-
-  if(dataPtr->getSize() != count)
-  {
-    QString ss = QObject::tr("Size of image and size of DataArray do not match");
-    setErrorCondition(-14, ss);
-    return;
-  }
+  size_t typeSize = image.GetPixelFormat().GetPixelSize();
 
   if(dataPtr->getTypeSize() != typeSize)
   {
     QString ss = QObject::tr("Size of pixel and size of DataArray type do not match");
-    setErrorCondition(-15, ss);
+    setErrorCondition(-10, ss);
     return;
   }
 
-  const void* pixelData = pixels->getData();
+  if(dataPtr->getSize() * dataPtr->getTypeSize() != size)
+  {
+    QString ss = QObject::tr("Size of image and size of DataArray do not match");
+    setErrorCondition(-11, ss);
+    return;
+  }
 
   void* data = dataPtr->getVoidPointer(0);
 
-  std::memcpy(data, pixelData, count * typeSize);
+  std::memcpy(data, buffer.data(), buffer.size());
 }
 
 // -----------------------------------------------------------------------------
@@ -439,7 +353,7 @@ QString ReadDicondeFile::getSubGroupName() const
 // -----------------------------------------------------------------------------
 QString ReadDicondeFile::getHumanLabel() const
 {
-  return "Read DICONDE file";
+  return "Import DCM file";
 }
 
 // -----------------------------------------------------------------------------
