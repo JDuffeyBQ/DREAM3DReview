@@ -31,7 +31,7 @@
  *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-#include "ReadDicondeFile.h"
+#include "ImportDcmFile.h"
 
 #include "SIMPLib/Common/Constants.h"
 #include "SIMPLib/FilterParameters/AbstractFilterParametersReader.h"
@@ -55,7 +55,7 @@ enum createdPathID : RenameDataPath::DataID_t
 };
 } // namespace
 
-struct ReadDicondeFile::Impl
+struct ImportDcmFile::Impl
 {
   IDataArray::WeakPointer m_DataArray;
 
@@ -66,7 +66,7 @@ struct ReadDicondeFile::Impl
 };
 
 // -----------------------------------------------------------------------------
-ReadDicondeFile::ReadDicondeFile()
+ImportDcmFile::ImportDcmFile()
 : AbstractFilter()
 , p_Impl(std::make_unique<Impl>())
 , m_DataContainerPath(SIMPL::Defaults::DataContainerName)
@@ -77,10 +77,10 @@ ReadDicondeFile::ReadDicondeFile()
 }
 
 // -----------------------------------------------------------------------------
-ReadDicondeFile::~ReadDicondeFile() = default;
+ImportDcmFile::~ImportDcmFile() = default;
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::initialize()
+void ImportDcmFile::initialize()
 {
   clearErrorCode();
   clearWarningCode();
@@ -88,25 +88,25 @@ void ReadDicondeFile::initialize()
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::setupFilterParameters()
+void ImportDcmFile::setupFilterParameters()
 {
   FilterParameterVectorType parameters;
 
-  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ReadDicondeFile, "*.dcm", "DICOM/DICONDE"));
-  parameters.push_back(SIMPL_NEW_DC_CREATION_FP("Created Geometry", DataContainerPath, FilterParameter::Category::CreatedArray, ReadDicondeFile));
+  parameters.push_back(SIMPL_NEW_INPUT_FILE_FP("Input File", InputFilePath, FilterParameter::Category::Parameter, ImportDcmFile, "*.dcm", "DICOM/DICONDE"));
+  parameters.push_back(SIMPL_NEW_DC_CREATION_FP("Created Geometry", DataContainerPath, FilterParameter::Category::CreatedArray, ImportDcmFile));
 
   setFilterParameters(parameters);
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::readFilterParameters(AbstractFilterParametersReader* reader, int index)
+void ImportDcmFile::readFilterParameters(AbstractFilterParametersReader* reader, int index)
 {
   reader->openFilterGroup(this, index);
   reader->closeFilterGroup();
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::dataCheck()
+void ImportDcmFile::dataCheck()
 {
   clearErrorCode();
   clearWarningCode();
@@ -226,7 +226,7 @@ void ReadDicondeFile::dataCheck()
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::preflight()
+void ImportDcmFile::preflight()
 {
   // These are the REQUIRED lines of CODE to make sure the filter behaves correctly
   setInPreflight(true);              // Set the fact that we are preflighting.
@@ -238,7 +238,7 @@ void ReadDicondeFile::preflight()
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::execute()
+void ImportDcmFile::execute()
 {
   initialize();
   dataCheck();
@@ -307,9 +307,9 @@ void ReadDicondeFile::execute()
 }
 
 // -----------------------------------------------------------------------------
-AbstractFilter::Pointer ReadDicondeFile::newFilterInstance(bool copyFilterParameters) const
+AbstractFilter::Pointer ImportDcmFile::newFilterInstance(bool copyFilterParameters) const
 {
-  ReadDicondeFile::Pointer filter = ReadDicondeFile::New();
+  ImportDcmFile::Pointer filter = ImportDcmFile::New();
   if(copyFilterParameters)
   {
     copyFilterParameterInstanceVariables(filter.get());
@@ -318,19 +318,19 @@ AbstractFilter::Pointer ReadDicondeFile::newFilterInstance(bool copyFilterParame
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getCompiledLibraryName() const
+QString ImportDcmFile::getCompiledLibraryName() const
 {
   return DREAM3DReviewConstants::DREAM3DReviewBaseName;
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getBrandingString() const
+QString ImportDcmFile::getBrandingString() const
 {
   return DREAM3DReviewConstants::DREAM3DReviewBaseName;
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getFilterVersion() const
+QString ImportDcmFile::getFilterVersion() const
 {
   QString version;
   QTextStream vStream(&version);
@@ -339,76 +339,76 @@ QString ReadDicondeFile::getFilterVersion() const
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getGroupName() const
+QString ImportDcmFile::getGroupName() const
 {
   return DREAM3DReviewConstants::FilterGroups::DREAM3DReviewFilters;
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getSubGroupName() const
+QString ImportDcmFile::getSubGroupName() const
 {
   return "IO";
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getHumanLabel() const
+QString ImportDcmFile::getHumanLabel() const
 {
-  return "Import DCM file";
+  return "Import DCM File";
 }
 
 // -----------------------------------------------------------------------------
-QUuid ReadDicondeFile::getUuid() const
+QUuid ImportDcmFile::getUuid() const
 {
-  return QUuid("{9f4a5610-067f-5042-a661-d3f51111e980}");
+  return QUuid("{4ab56073-cc79-56f4-83d7-7575d08ab47c}");
 }
 
 // -----------------------------------------------------------------------------
-ReadDicondeFile::Pointer ReadDicondeFile::NullPointer()
+ImportDcmFile::Pointer ImportDcmFile::NullPointer()
 {
   return Pointer(static_cast<Self*>(nullptr));
 }
 
 // -----------------------------------------------------------------------------
-ReadDicondeFile::Pointer ReadDicondeFile::New()
+ImportDcmFile::Pointer ImportDcmFile::New()
 {
-  struct make_shared_enabler : public ReadDicondeFile
+  struct make_shared_enabler : public ImportDcmFile
   {
   };
   return std::make_shared<make_shared_enabler>();
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getNameOfClass() const
+QString ImportDcmFile::getNameOfClass() const
 {
   return ClassName();
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::ClassName()
+QString ImportDcmFile::ClassName()
 {
-  return QString("ReadDicondeFile");
+  return QString("ImportDcmFile");
 }
 
 // -----------------------------------------------------------------------------
-QString ReadDicondeFile::getInputFilePath() const
+QString ImportDcmFile::getInputFilePath() const
 {
   return m_InputFilePath;
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::setInputFilePath(const QString& value)
+void ImportDcmFile::setInputFilePath(const QString& value)
 {
   m_InputFilePath = value;
 }
 
 // -----------------------------------------------------------------------------
-DataArrayPath ReadDicondeFile::getDataContainerPath() const
+DataArrayPath ImportDcmFile::getDataContainerPath() const
 {
   return m_DataContainerPath;
 }
 
 // -----------------------------------------------------------------------------
-void ReadDicondeFile::setDataContainerPath(const DataArrayPath& value)
+void ImportDcmFile::setDataContainerPath(const DataArrayPath& value)
 {
   m_DataContainerPath = value;
 }

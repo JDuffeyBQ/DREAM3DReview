@@ -1,4 +1,4 @@
-# Read DICONDE File #
+# Import DCM File #
 
 ## Group (Subgroup) ##
 

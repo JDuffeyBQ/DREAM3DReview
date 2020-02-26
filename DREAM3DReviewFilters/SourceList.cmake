@@ -82,7 +82,7 @@ set(_PublicFilters
   InsertTransformationPhases
   TiDwellFatigueCrystallographicAnalysis
 
-  ReadDicondeFile
+  ImportDcmFile
 )
 
 list(LENGTH _PublicFilters PluginNumFilters)

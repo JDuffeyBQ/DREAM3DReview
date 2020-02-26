@@ -41,9 +41,9 @@
 #include "DREAM3DReview/DREAM3DReviewDLLExport.h"
 
 /**
- * @brief The ReadDicondeFile class. See [Filter documentation](@ref ReadDicondeFile) for details.
+ * @brief The ReadDicondeFile class. See [Filter documentation](@ref ImportDcmFile) for details.
  */
-class DREAM3DReview_EXPORT ReadDicondeFile : public AbstractFilter
+class DREAM3DReview_EXPORT ImportDcmFile : public AbstractFilter
 {
   Q_OBJECT
 
@@ -56,7 +56,7 @@ class DREAM3DReview_EXPORT ReadDicondeFile : public AbstractFilter
 #endif
 
 public:
-  using Self = ReadDicondeFile;
+  using Self = ImportDcmFile;
   using Pointer = std::shared_ptr<Self>;
   using ConstPointer = std::shared_ptr<const Self>;
   using WeakPointer = std::weak_ptr<Self>;
@@ -103,7 +103,7 @@ public:
    */
   static QString ClassName();
 
-  ~ReadDicondeFile() override;
+  ~ImportDcmFile() override;
 
   /**
    * @brief getCompiledLibraryName Reimplemented from @see AbstractFilter class
@@ -197,7 +197,7 @@ signals:
   void preflightExecuted();
 
 protected:
-  ReadDicondeFile();
+  ImportDcmFile();
 
   /**
    * @brief dataCheck Checks for the appropriate parameter values and availability of arrays
@@ -217,8 +217,8 @@ private:
   DataArrayPath m_DataContainerPath;
 
 public:
-  ReadDicondeFile(const ReadDicondeFile&) = delete;            // Copy Constructor Not Implemented
-  ReadDicondeFile(ReadDicondeFile&&) = delete;                 // Move Constructor Not Implemented
-  ReadDicondeFile& operator=(const ReadDicondeFile&) = delete; // Copy Assignment Not Implemented
-  ReadDicondeFile& operator=(ReadDicondeFile&&) = delete;      // Move Assignment Not Implemented
+  ImportDcmFile(const ImportDcmFile&) = delete;                // Copy Constructor Not Implemented
+  ImportDcmFile(ImportDcmFile&&) = delete;                     // Move Constructor Not Implemented
+  ImportDcmFile& operator=(const ImportDcmFile&) = delete;     // Copy Assignment Not Implemented
+  ImportDcmFile& operator=(ImportDcmFile&&) = delete;          // Move Assignment Not Implemented
 };
