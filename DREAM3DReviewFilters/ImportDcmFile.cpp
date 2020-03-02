@@ -274,36 +274,32 @@ void ImportDcmFile::execute()
 
   gdcm::Image image = imageReader.GetImage();
 
-  size_t size = image.GetBufferLength();
+  size_t bufferSize = image.GetBufferLength();
 
-  std::vector<char> buffer(size, '\0');
+  size_t bufferTypeSize = image.GetPixelFormat().GetPixelSize();
 
-  if(!image.GetBuffer(buffer.data()))
+  if(dataPtr->getTypeSize() != bufferTypeSize)
   {
-    QString ss = QObject::tr("Unable to get image data");
+    QString ss = QObject::tr("Size of pixel and size of DataArray type do not match");
     setErrorCondition(-9, ss);
     return;
   }
 
-  size_t typeSize = image.GetPixelFormat().GetPixelSize();
-
-  if(dataPtr->getTypeSize() != typeSize)
-  {
-    QString ss = QObject::tr("Size of pixel and size of DataArray type do not match");
-    setErrorCondition(-10, ss);
-    return;
-  }
-
-  if(dataPtr->getSize() * dataPtr->getTypeSize() != size)
+  if(dataPtr->getSize() * dataPtr->getTypeSize() != bufferSize)
   {
     QString ss = QObject::tr("Size of image and size of DataArray do not match");
-    setErrorCondition(-11, ss);
+    setErrorCondition(-10, ss);
     return;
   }
 
   void* data = dataPtr->getVoidPointer(0);
 
-  std::memcpy(data, buffer.data(), buffer.size());
+  if(!image.GetBuffer(reinterpret_cast<char*>(data)))
+  {
+    QString ss = QObject::tr("Unable to get image data");
+    setErrorCondition(-11, ss);
+    return;
+  }
 }
 
 // -----------------------------------------------------------------------------
