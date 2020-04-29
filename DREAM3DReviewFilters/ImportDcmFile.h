@@ -47,13 +47,13 @@ class DREAM3DReview_EXPORT ImportDcmFile : public AbstractFilter
 {
   Q_OBJECT
 
-#ifdef SIMPL_ENABLE_PYTHON
-  PYB11_CREATE_BINDINGS(ReadDicondeFile SUPERCLASS AbstractFilter)
-  PYB11_SHARED_POINTERS(ReadDicondeFile)
-  PYB11_STATIC_NEW_MACRO(ReadDicondeFile)
+  PYB11_BEGIN_BINDINGS(ImportDcmFile SUPERCLASS AbstractFilter)
+  PYB11_FILTER()
+  PYB11_SHARED_POINTERS(ImportDcmFile)
+  PYB11_STATIC_NEW_MACRO(ImportDcmFile)
   PYB11_PROPERTY(QString InputFilePath READ getInputFilePath WRITE setInputFilePath)
   PYB11_PROPERTY(DataArrayPath DataContainerPath READ getDataContainerPath WRITE setDataContainerPath)
-#endif
+  PYB11_END_BINDINGS()
 
 public:
   using Self = ImportDcmFile;
@@ -167,42 +167,13 @@ public:
    */
   void execute() override;
 
-  /**
-   * @brief This function runs some sanity checks on the DataContainer and inputs
-   * in an attempt to ensure the filter can process the inputs.
-   */
-  void preflight() override;
-
-signals:
-  /**
-   * @brief updateFilterParameters Emitted when the Filter requests all the latest Filter parameters
-   * be pushed from a user-facing control (such as a widget)
-   * @param filter Filter instance pointer
-   */
-  void updateFilterParameters(AbstractFilter* filter);
-
-  /**
-   * @brief parametersChanged Emitted when any Filter parameter is changed internally
-   */
-  void parametersChanged();
-
-  /**
-   * @brief preflightAboutToExecute Emitted just before calling dataCheck()
-   */
-  void preflightAboutToExecute();
-
-  /**
-   * @brief preflightExecuted Emitted just after calling dataCheck()
-   */
-  void preflightExecuted();
-
 protected:
   ImportDcmFile();
 
   /**
    * @brief dataCheck Checks for the appropriate parameter values and availability of arrays
    */
-  void dataCheck();
+  void dataCheck() override;
 
   /**
    * @brief Initializes all the private instance variables.

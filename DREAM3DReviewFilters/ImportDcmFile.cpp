@@ -200,22 +200,22 @@ void ImportDcmFile::dataCheck()
   switch(type)
   {
   case gdcm::PixelFormat::ScalarType::UINT8:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt8ArrayType, AbstractFilter, uint8_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt8ArrayType>(this, dataArrayName, 0, cDims);
     break;
   case gdcm::PixelFormat::ScalarType::INT8:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int8ArrayType, AbstractFilter, int8_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int8ArrayType>(this, dataArrayName, 0, cDims);
     break;
   case gdcm::PixelFormat::ScalarType::UINT16:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt16ArrayType, AbstractFilter, uint16_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt16ArrayType>(this, dataArrayName, 0, cDims);
     break;
   case gdcm::PixelFormat::ScalarType::INT16:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int16ArrayType, AbstractFilter, int16_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int16ArrayType>(this, dataArrayName, 0, cDims);
     break;
   case gdcm::PixelFormat::ScalarType::UINT32:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt32ArrayType, AbstractFilter, uint32_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<UInt32ArrayType>(this, dataArrayName, 0, cDims);
     break;
   case gdcm::PixelFormat::ScalarType::INT32:
-    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int32ArrayType, AbstractFilter, int32_t>(this, dataArrayName, 0, cDims);
+    p_Impl->m_DataArray = matrix->createNonPrereqArray<Int32ArrayType>(this, dataArrayName, 0, cDims);
     break;
   default: {
     QString ss = QObject::tr("Invalid image representation type");
@@ -223,18 +223,6 @@ void ImportDcmFile::dataCheck()
   }
     return;
   }
-}
-
-// -----------------------------------------------------------------------------
-void ImportDcmFile::preflight()
-{
-  // These are the REQUIRED lines of CODE to make sure the filter behaves correctly
-  setInPreflight(true);              // Set the fact that we are preflighting.
-  emit preflightAboutToExecute();    // Emit this signal so that other widgets can do one file update
-  emit updateFilterParameters(this); // Emit this signal to have the widgets push their values down to the filter
-  dataCheck();                       // Run our DataCheck to make sure everthing is setup correctly
-  emit preflightExecuted();          // We are done preflighting this filter
-  setInPreflight(false);             // Inform the system this filter is NOT in preflight mode anymore.
 }
 
 // -----------------------------------------------------------------------------
