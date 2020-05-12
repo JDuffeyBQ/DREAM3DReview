@@ -1,37 +1,37 @@
 /* ============================================================================
-* Copyright (c) 2009-2016 BlueQuartz Software, LLC
-*
-* Redistribution and use in source and binary forms, with or without modification,
-* are permitted provided that the following conditions are met:
-*
-* Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* Redistributions in binary form must reproduce the above copyright notice, this
-* list of conditions and the following disclaimer in the documentation and/or
-* other materials provided with the distribution.
-*
-* Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
-* contributors may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-* USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The code contained herein was partially funded by the followig contracts:
-*    United States Air Force Prime Contract FA8650-07-D-5800
-*    United States Air Force Prime Contract FA8650-10-D-5210
-*    United States Prime Contract Navy N00173-07-C-2068
-*
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Copyright (c) 2009-2016 BlueQuartz Software, LLC
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
+ * contributors may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The code contained herein was partially funded by the followig contracts:
+ *    United States Air Force Prime Contract FA8650-07-D-5800
+ *    United States Air Force Prime Contract FA8650-10-D-5210
+ *    United States Prime Contract Navy N00173-07-C-2068
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #include "AverageVertexArrayToEdgeFaceCellArray.h"
 
 #include <QtCore/QTextStream>
@@ -67,8 +67,7 @@ AverageVertexArrayToEdgeFaceCellArray::AverageVertexArrayToEdgeFaceCellArray()
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-AverageVertexArrayToEdgeFaceCellArray::~AverageVertexArrayToEdgeFaceCellArray()
-= default;
+AverageVertexArrayToEdgeFaceCellArray::~AverageVertexArrayToEdgeFaceCellArray() = default;
 
 // -----------------------------------------------------------------------------
 //
@@ -112,7 +111,8 @@ void AverageVertexArrayToEdgeFaceCellArray::readFilterParameters(AbstractFilterP
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray::Pointer inDataPtr, DataArray<float>::Pointer outDataPtr, const DataContainer::Pointer& m, bool weightAverage)
+template <typename T>
+void findVertexAverage(AbstractFilter* filter, IDataArray::Pointer inDataPtr, DataArray<float>::Pointer outDataPtr, const DataContainer::Pointer& m, bool weightAverage)
 {
   typename DataArray<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<DataArray<T>>(inDataPtr);
   IGeometry::Pointer geom = m->getGeometry();
@@ -134,8 +134,7 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
     }
     switch(geomType)
     {
-    case IGeometry::Type::Edge:
-    {
+    case IGeometry::Type::Edge: {
       EdgeGeom::Pointer edgeGeom = m->getGeometryAs<EdgeGeom>();
       SharedVertexList::Pointer vertices = edgeGeom->getVertices();
       SharedEdgeList::Pointer edges = edgeGeom->getEdges();
@@ -143,8 +142,7 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<MeshIndexType, T>(edges, vertices, centroids, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Triangle:
-    {
+    case IGeometry::Type::Triangle: {
       TriangleGeom::Pointer triGeom = m->getGeometryAs<TriangleGeom>();
       SharedVertexList::Pointer vertices = triGeom->getVertices();
       SharedTriList::Pointer triangles = triGeom->getTriangles();
@@ -152,8 +150,7 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<MeshIndexType, T>(triangles, vertices, centroids, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Quad:
-    {
+    case IGeometry::Type::Quad: {
       QuadGeom::Pointer quadGeom = m->getGeometryAs<QuadGeom>();
       SharedVertexList::Pointer vertices = quadGeom->getVertices();
       SharedQuadList::Pointer quads = quadGeom->getQuads();
@@ -161,8 +158,7 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<MeshIndexType, T>(quads, vertices, centroids, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Tetrahedral:
-    {
+    case IGeometry::Type::Tetrahedral: {
       TetrahedralGeom::Pointer tets = m->getGeometryAs<TetrahedralGeom>();
       SharedVertexList::Pointer vertices = tets->getVertices();
       SharedTetList::Pointer tet = tets->getTetrahedra();
@@ -170,8 +166,7 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<MeshIndexType, T>(tet, vertices, centroids, inputDataPtr, outDataPtr);
       break;
     }
-    default:
-    {
+    default: {
       break;
     }
     }
@@ -180,36 +175,31 @@ template <typename T> void findVertexAverage(AbstractFilter* filter, IDataArray:
   {
     switch(geomType)
     {
-    case IGeometry::Type::Edge:
-    {
+    case IGeometry::Type::Edge: {
       EdgeGeom::Pointer edgeGeom = m->getGeometryAs<EdgeGeom>();
       SharedEdgeList::Pointer edges = edgeGeom->getEdges();
       GeometryHelpers::Generic::AverageVertexArrayValues<MeshIndexType, T>(edges, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Triangle:
-    {
+    case IGeometry::Type::Triangle: {
       TriangleGeom::Pointer triGeom = m->getGeometryAs<TriangleGeom>();
       SharedTriList::Pointer triangles = triGeom->getTriangles();
       GeometryHelpers::Generic::AverageVertexArrayValues<MeshIndexType, T>(triangles, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Quad:
-    {
+    case IGeometry::Type::Quad: {
       QuadGeom::Pointer quadGeom = m->getGeometryAs<QuadGeom>();
       SharedQuadList::Pointer quads = quadGeom->getQuads();
       GeometryHelpers::Generic::AverageVertexArrayValues<MeshIndexType, T>(quads, inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Tetrahedral:
-    {
+    case IGeometry::Type::Tetrahedral: {
       TetrahedralGeom::Pointer tets = m->getGeometryAs<TetrahedralGeom>();
       SharedTetList::Pointer tet = tets->getTetrahedra();
       GeometryHelpers::Generic::AverageVertexArrayValues<MeshIndexType, T>(tet, inputDataPtr, outDataPtr);
       break;
     }
-    default:
-    {
+    default: {
       break;
     }
     }
@@ -324,8 +314,8 @@ void AverageVertexArrayToEdgeFaceCellArray::dataCheck()
   std::vector<size_t> cDims = m_InVertexArrayPtr.lock()->getComponentDimensions();
   size_t numVertexTuples = m_InVertexArrayPtr.lock()->getNumberOfTuples();
 
-  m_AverageCellArrayPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, getAverageCellArrayPath(), 0, cDims);   /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_AverageCellArrayPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, getAverageCellArrayPath(), 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_AverageCellArrayPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_AverageCellArray = m_AverageCellArrayPtr.lock()->getPointer(0);
@@ -355,7 +345,6 @@ void AverageVertexArrayToEdgeFaceCellArray::dataCheck()
   }
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
@@ -372,7 +361,6 @@ void AverageVertexArrayToEdgeFaceCellArray::execute()
   DataContainer::Pointer m = getDataContainerArray()->getDataContainer(m_SelectedArrayPath.getDataContainerName());
 
   EXECUTE_FUNCTION_TEMPLATE(this, findVertexAverage, m_InVertexArrayPtr.lock(), this, m_InVertexArrayPtr.lock(), m_AverageCellArrayPtr.lock(), m, getWeightedAverage())
-
 }
 
 // -----------------------------------------------------------------------------

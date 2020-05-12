@@ -187,7 +187,7 @@ public:
    * @brief getBrandingString Returns the branding string for the filter, which is a tag
    * used to denote the filter's association with specific plugins
    * @return Branding string
-  */
+   */
   QString getBrandingString() const override;
 
   /**
@@ -275,4 +275,3 @@ public:
   DBSCAN& operator=(const DBSCAN&) = delete; // Copy Assignment Not Implemented
   DBSCAN& operator=(DBSCAN&&) = delete;      // Move Assignment Not Implemented
 };
-

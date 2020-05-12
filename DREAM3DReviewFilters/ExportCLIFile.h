@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #ifndef _exportclifile_h_
 #define _exportclifile_h_
 
@@ -146,7 +146,7 @@ public:
    * @brief getBrandingString Returns the branding string for the filter, which is a tag
    * used to denote the filter's association with specific plugins
    * @return Branding string
-  */
+   */
   QString getBrandingString() const override;
 
   /**
@@ -196,13 +196,13 @@ protected:
   ExportCLIFile();
 
   /**
-  * @brief dataCheck Checks for the appropriate parameter values and availability of arrays
-  */
+   * @brief dataCheck Checks for the appropriate parameter values and availability of arrays
+   */
   void dataCheck() override;
 
   /**
-  * @brief Initializes all the private instance variables.
-  */
+   * @brief Initializes all the private instance variables.
+   */
   void initialize();
 
 private:

@@ -216,7 +216,6 @@ public:
    */
   void execute() override;
 
-
 protected:
   DiscretizeDDDomain();
 

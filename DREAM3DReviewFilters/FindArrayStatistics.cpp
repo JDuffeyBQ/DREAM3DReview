@@ -1,37 +1,37 @@
 /* ============================================================================
-* Copyright (c) 2009-2016 BlueQuartz Software, LLC
-*
-* Redistribution and use in source and binary forms, with or without modification,
-* are permitted provided that the following conditions are met:
-*
-* Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* Redistributions in binary form must reproduce the above copyright notice, this
-* list of conditions and the following disclaimer in the documentation and/or
-* other materials provided with the distribution.
-*
-* Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
-* contributors may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-* USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The code contained herein was partially funded by the followig contracts:
-*    United States Air Force Prime Contract FA8650-07-D-5800
-*    United States Air Force Prime Contract FA8650-10-D-5210
-*    United States Prime Contract Navy N00173-07-C-2068
-*
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Copyright (c) 2009-2016 BlueQuartz Software, LLC
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
+ * contributors may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The code contained herein was partially funded by the followig contracts:
+ *    United States Air Force Prime Contract FA8650-07-D-5800
+ *    United States Air Force Prime Contract FA8650-10-D-5210
+ *    United States Prime Contract Navy N00173-07-C-2068
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #include "FindArrayStatistics.h"
 
 #include <cmath>
@@ -106,8 +106,7 @@ FindArrayStatistics::FindArrayStatistics()
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-FindArrayStatistics::~FindArrayStatistics()
-= default;
+FindArrayStatistics::~FindArrayStatistics() = default;
 
 // -----------------------------------------------------------------------------
 //
@@ -162,7 +161,8 @@ void FindArrayStatistics::setupFilterParameters()
   parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Maximum", MaximumArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
   parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Mean", MeanArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
   parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Median", MedianArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
-  parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Standard Deviation", StdDeviationArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
+  parameters.push_back(
+      SIMPL_NEW_DA_WITH_LINKED_AM_FP("Standard Deviation", StdDeviationArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
   parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Summation", SummationArrayName, DestinationAttributeMatrix, DestinationAttributeMatrix, FilterParameter::CreatedArray, FindArrayStatistics));
   parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Standardized Data", StandardizedArrayName, SelectedArrayPath, SelectedArrayPath, FilterParameter::CreatedArray, FindArrayStatistics));
 
@@ -302,11 +302,11 @@ void FindArrayStatistics::dataCheck()
   getDataContainerArray()->validateNumberOfTuples(this, dataArrayPaths);
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> int64_t findLength(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+int64_t findLength(C<T, Ts...>& source)
 {
   return static_cast<int64_t>(source.size());
 }
@@ -314,7 +314,8 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> T findMin(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+T findMin(C<T, Ts...>& source)
 {
   if(source.empty())
   {
@@ -326,7 +327,8 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> T findMax(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+T findMax(C<T, Ts...>& source)
 {
   if(source.empty())
   {
@@ -338,7 +340,8 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> float findMean(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+float findMean(C<T, Ts...>& source)
 {
   if(source.empty())
   {
@@ -351,7 +354,8 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename... Ts> bool findMean(C<bool, Ts...>& source)
+template <template <typename, typename...> class C, typename... Ts>
+bool findMean(C<bool, Ts...>& source)
 {
   if(source.empty())
   {
@@ -364,7 +368,8 @@ template <template <typename, typename...> class C, typename... Ts> bool findMea
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> float findMedian(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+float findMedian(C<T, Ts...>& source)
 {
   // Need a copy, not a reference, since we will be messing with the vector order
   std::vector<T> tmpList{std::begin(source), std::end(source)};
@@ -379,16 +384,15 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
   {
     return static_cast<float>(medVal);
   }
-  
-  
-    return static_cast<float>((0.5f * (medVal + tmpList[halfElements - 1])));
-  
+
+  return static_cast<float>((0.5f * (medVal + tmpList[halfElements - 1])));
 }
 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> float findStdDeviation(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+float findStdDeviation(C<T, Ts...>& source)
 {
   if(source.empty())
   {
@@ -405,7 +409,8 @@ template <template <typename, typename...> class C, typename T, typename... Ts> 
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename... Ts> bool findStdDeviation(C<bool, Ts...>& source)
+template <template <typename, typename...> class C, typename... Ts>
+bool findStdDeviation(C<bool, Ts...>& source)
 {
   if(source.empty())
   {
@@ -418,7 +423,8 @@ template <template <typename, typename...> class C, typename... Ts> bool findStd
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <template <typename, typename...> class C, typename T, typename... Ts> double findSummation(C<T, Ts...>& source)
+template <template <typename, typename...> class C, typename T, typename... Ts>
+double findSummation(C<T, Ts...>& source)
 {
   if(source.empty())
   {
@@ -474,7 +480,8 @@ void standardizeDataByIndex<bool>(IDataArray::Pointer dataPtr, FloatArrayType::P
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void standardizeData(IDataArray::Pointer dataPtr, FloatArrayType::Pointer standardized, bool useMask, bool* mask, IDataArray::Pointer meanPtr, IDataArray::Pointer stdPtr)
+template <typename T>
+void standardizeData(IDataArray::Pointer dataPtr, FloatArrayType::Pointer standardized, bool useMask, bool* mask, IDataArray::Pointer meanPtr, IDataArray::Pointer stdPtr)
 {
   typename DataArray<T>::Pointer inDataPtr = std::dynamic_pointer_cast<DataArray<T>>(dataPtr);
   FloatArrayType::Pointer muPtr = std::dynamic_pointer_cast<FloatArrayType>(meanPtr);
@@ -506,7 +513,8 @@ template <typename T> void standardizeData(IDataArray::Pointer dataPtr, FloatArr
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <> void standardizeData<bool>(IDataArray::Pointer dataPtr, FloatArrayType::Pointer standardized, bool useMask, bool* mask, IDataArray::Pointer meanPtr, IDataArray::Pointer stdPtr)
+template <>
+void standardizeData<bool>(IDataArray::Pointer dataPtr, FloatArrayType::Pointer standardized, bool useMask, bool* mask, IDataArray::Pointer meanPtr, IDataArray::Pointer stdPtr)
 {
   // Standardization of a boolean array is a no-op
 }
@@ -514,7 +522,8 @@ template <> void standardizeData<bool>(IDataArray::Pointer dataPtr, FloatArrayTy
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> class FindStatisticsByIndexImpl
+template <typename T>
+class FindStatisticsByIndexImpl
 {
 public:
   FindStatisticsByIndexImpl(std::unordered_map<int32_t, std::list<T>>& featureDataMap, bool length, bool min, bool max, bool mean, bool median, bool stdDeviation, bool summation,
@@ -861,7 +870,6 @@ void FindArrayStatistics::execute()
       EXECUTE_FUNCTION_TEMPLATE(this, standardizeData, m_InputArrayPtr.lock(), m_InputArrayPtr.lock(), m_StandardizedPtr.lock(), m_UseMask, m_Mask, meanPtr, stdPtr)
     }
   }
-
 }
 
 // -----------------------------------------------------------------------------

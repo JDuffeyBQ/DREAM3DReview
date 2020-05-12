@@ -280,7 +280,6 @@ public:
    */
   void execute() override;
 
-
   /* These are non-exposed to the user through the GUI. Manual Pipelines are OK to set them */
   /**
    * @brief Setter property for RefFrameZDir

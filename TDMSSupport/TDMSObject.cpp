@@ -61,8 +61,8 @@ void TDMSObject::populateMetaData()
     }
     if(m_ArrayDimension != m_MetaData->m_SegmentMetaData.back().ArrayDimension)
     {
-      std::string info("Array dimension stored in object: " + std::to_string(m_ArrayDimension) + "\n" + "Array dimension indicated by meta data: " +
-                       std::to_string(m_MetaData->m_SegmentMetaData.back().ArrayDimension));
+      std::string info("Array dimension stored in object: " + std::to_string(m_ArrayDimension) + "\n" +
+                       "Array dimension indicated by meta data: " + std::to_string(m_MetaData->m_SegmentMetaData.back().ArrayDimension));
       throw FatalTDMSException(TDMSExceptionMessages::ObjectMetaDataMismatch, info);
     }
     if(m_MetaData->m_SegmentMetaData.back().HasData)

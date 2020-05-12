@@ -48,8 +48,12 @@ public:
     return QString("DistanceTemplate");
   }
 
-  DistanceTemplate(){}
-  virtual ~DistanceTemplate(){}
+  DistanceTemplate()
+  {
+  }
+  virtual ~DistanceTemplate()
+  {
+  }
 
   // -----------------------------------------------------------------------------
   //
@@ -77,7 +81,7 @@ public:
   // -----------------------------------------------------------------------------
   //
   // -----------------------------------------------------------------------------
-  template<typename leftDataType, typename rightDataType, typename outDataType>
+  template <typename leftDataType, typename rightDataType, typename outDataType>
   static outDataType GetDistance(leftDataType* leftVector, rightDataType* rightVector, size_t compDims, int distMetric)
   {
     double dist = 0.0;
@@ -87,9 +91,9 @@ public:
     double epsilon = std::numeric_limits<double>::min();
 
     // Euclidean
-    if (distMetric == 0)
+    if(distMetric == 0)
     {
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -99,9 +103,9 @@ public:
       dist = sqrt(dist);
     }
     // Squared Euclidean
-    else if (distMetric == 1)
+    else if(distMetric == 1)
     {
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -109,9 +113,9 @@ public:
       }
     }
     // Manhattan
-    else if (distMetric == 2)
+    else if(distMetric == 2)
     {
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -119,12 +123,12 @@ public:
       }
     }
     // Cosine
-    else if (distMetric == 3)
+    else if(distMetric == 3)
     {
       double r = 0;
       double x = 0;
       double y = 0;
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -135,14 +139,14 @@ public:
       dist = 1 - (r / (sqrt(x * y) + epsilon));
     }
     // Pearson
-    else if (distMetric == 4)
+    else if(distMetric == 4)
     {
       double r = 0;
       double x = 0;
       double y = 0;
       double xAvg = 0;
       double yAvg = 0;
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -151,7 +155,7 @@ public:
       }
       xAvg /= static_cast<double>(compDims);
       yAvg /= static_cast<double>(compDims);
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -162,14 +166,14 @@ public:
       dist = 1 - (r / (sqrt(x * y) + epsilon));
     }
     // Squared Pearson
-    else if (distMetric == 5)
+    else if(distMetric == 5)
     {
       double r = 0;
       double x = 0;
       double y = 0;
       double xAvg = 0;
       double yAvg = 0;
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -178,7 +182,7 @@ public:
       }
       xAvg /= static_cast<double>(compDims);
       yAvg /= static_cast<double>(compDims);
-      for (size_t i=0;i<compDims;i++)
+      for(size_t i = 0; i < compDims; i++)
       {
         lVal = static_cast<double>(leftVector[i]);
         rVal = static_cast<double>(rightVector[i]);
@@ -197,4 +201,3 @@ private:
   DistanceTemplate(const DistanceTemplate&); // Copy Constructor Not Implemented
   void operator=(const DistanceTemplate&);   // Move assignment Not Implemented
 };
-

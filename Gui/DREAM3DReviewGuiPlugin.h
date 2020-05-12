@@ -10,13 +10,12 @@ class DREAM3DReviewGuiPlugin : public DREAM3DReviewPlugin
 
 public:
   DREAM3DReviewGuiPlugin();
-   ~DREAM3DReviewGuiPlugin() override;
-  
+  ~DREAM3DReviewGuiPlugin() override;
+
   /**
    * @brief Register all the filters with the FilterWidgetFactory
    */
   void registerFilterWidgets(FilterWidgetManager* fwm) override;
-  
 
 public:
   DREAM3DReviewGuiPlugin(const DREAM3DReviewGuiPlugin&) = delete;            // Copy Constructor Not Implemented

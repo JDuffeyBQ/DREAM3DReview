@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered “public domain” (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered “public domain” (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "InterpolateMeshToRegularGrid.h"
 
@@ -467,7 +467,8 @@ void copyDataToInterpolatedGrid(IDataArray::Pointer inDataPtr, IDataArray::Point
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename DataType> void findVertexAverage(AbstractFilter* filter, IDataArray::Pointer inDataPtr, DataArray<float>::Pointer outDataPtr, DataContainer::Pointer m, bool weightAverage)
+template <typename DataType>
+void findVertexAverage(AbstractFilter* filter, IDataArray::Pointer inDataPtr, DataArray<float>::Pointer outDataPtr, DataContainer::Pointer m, bool weightAverage)
 {
   typename DataArray<DataType>::Pointer inputDataPtr = std::dynamic_pointer_cast<DataArray<DataType>>(inDataPtr);
   IGeometry2D::Pointer geom2D = m->getGeometryAs<IGeometry2D>();
@@ -488,14 +489,12 @@ template <typename DataType> void findVertexAverage(AbstractFilter* filter, IDat
     }
     switch(geomType)
     {
-    case IGeometry::Type::Triangle:
-    {
+    case IGeometry::Type::Triangle: {
       TriangleGeom::Pointer tris = std::dynamic_pointer_cast<TriangleGeom>(geom2D);
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<int64_t, DataType>(tris->getTriangles(), tris->getVertices(), tris->getElementCentroids(), inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Quad:
-    {
+    case IGeometry::Type::Quad: {
       QuadGeom::Pointer quads = std::dynamic_pointer_cast<QuadGeom>(geom2D);
       GeometryHelpers::Generic::WeightedAverageVertexArrayValues<int64_t, DataType>(quads->getQuads(), quads->getVertices(), quads->getElementCentroids(), inputDataPtr, outDataPtr);
       break;
@@ -520,14 +519,12 @@ template <typename DataType> void findVertexAverage(AbstractFilter* filter, IDat
   {
     switch(geomType)
     {
-    case IGeometry::Type::Triangle:
-    {
+    case IGeometry::Type::Triangle: {
       TriangleGeom::Pointer tris = std::dynamic_pointer_cast<TriangleGeom>(geom2D);
       GeometryHelpers::Generic::AverageVertexArrayValues<int64_t, DataType>(tris->getTriangles(), inputDataPtr, outDataPtr);
       break;
     }
-    case IGeometry::Type::Quad:
-    {
+    case IGeometry::Type::Quad: {
       QuadGeom::Pointer quads = std::dynamic_pointer_cast<QuadGeom>(geom2D);
       GeometryHelpers::Generic::AverageVertexArrayValues<int64_t, DataType>(quads->getQuads(), inputDataPtr, outDataPtr);
       break;
@@ -655,7 +652,6 @@ void InterpolateMeshToRegularGrid::dataCheck()
     }
   }
 }
-
 
 // -----------------------------------------------------------------------------
 //

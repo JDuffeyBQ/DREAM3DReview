@@ -2,7 +2,6 @@
  * Your License or Copyright can go here
  */
 
-
 #include "ImportMASSIFData.h"
 
 #include <QtCore/QFileInfo>
@@ -272,7 +271,6 @@ QVector<QString> ImportMASSIFData::createHDF5DatasetPaths()
 
   return arrayPaths;
 }
-
 
 // -----------------------------------------------------------------------------
 //

@@ -41,7 +41,8 @@ inline QList<QDateTime> TDMSTimeStampsToQDateTimes(DataArray<uint8_t>::Pointer p
   return dateTimeList;
 }
 
-template <typename T> inline typename DataArray<T>::Pointer ReadValueFromFile(std::ifstream& filestream, std::string name)
+template <typename T>
+inline typename DataArray<T>::Pointer ReadValueFromFile(std::ifstream& filestream, std::string name)
 {
   typename DataArray<T>::Pointer data = DataArray<T>::CreateArray(1, QString::fromStdString(name), true);
   T* p = data->getPointer(0);
@@ -72,7 +73,8 @@ inline StringDataArray::Pointer ReadStringFromFile(std::ifstream& filestream, st
   return data;
 }
 
-template <typename T> inline void ReadArrayFromFile(std::ifstream& filestream, IDataArray::Pointer ptr, uint64_t pos, uint64_t bytes)
+template <typename T>
+inline void ReadArrayFromFile(std::ifstream& filestream, IDataArray::Pointer ptr, uint64_t pos, uint64_t bytes)
 {
   typename DataArray<T>::Pointer data = std::dynamic_pointer_cast<DataArray<T>>(ptr);
   T* p = data->getTuplePointer(pos);
@@ -93,13 +95,15 @@ inline void ReadStringArrayFromFile(std::ifstream& filestream, IDataArray::Point
   }
 }
 
-template <typename T> inline typename DataArray<T>::Pointer GenerateArray(uint64_t numTuples, std::string name)
+template <typename T>
+inline typename DataArray<T>::Pointer GenerateArray(uint64_t numTuples, std::string name)
 {
   typename DataArray<T>::Pointer data = DataArray<T>::CreateArray(numTuples, QString::fromStdString(name), false);
   return data;
 }
 
-template <typename T> inline void AllocateArray(IDataArray::Pointer ptr)
+template <typename T>
+inline void AllocateArray(IDataArray::Pointer ptr)
 {
   typename DataArray<T>::Pointer data = std::dynamic_pointer_cast<DataArray<T>>(ptr);
   if(!data)
@@ -127,7 +131,8 @@ inline void AllocateStringArray(IDataArray::Pointer ptr)
   data->initializeWithValue(QString("??????????"));
 }
 
-template <typename T> inline std::function<IDataArray::Pointer(std::ifstream&, std::string)> ValueReaderFactory()
+template <typename T>
+inline std::function<IDataArray::Pointer(std::ifstream&, std::string)> ValueReaderFactory()
 {
   return ReadValueFromFile<T>;
 }
@@ -142,17 +147,20 @@ inline std::function<IDataArray::Pointer(std::ifstream&, std::string)> StringRea
   return ReadStringFromFile;
 }
 
-template <typename T> inline std::function<IDataArray::Pointer(uint64_t, std::string)> ArrayGeneratorFactory()
+template <typename T>
+inline std::function<IDataArray::Pointer(uint64_t, std::string)> ArrayGeneratorFactory()
 {
   return GenerateArray<T>;
 }
 
-template <typename T> inline std::function<void(IDataArray::Pointer)> ArrayAllocatorFactory()
+template <typename T>
+inline std::function<void(IDataArray::Pointer)> ArrayAllocatorFactory()
 {
   return AllocateArray<T>;
 }
 
-template <typename T> inline std::function<void(std::ifstream&, IDataArray::Pointer, uint64_t, uint64_t)> ArrayReaderFactory()
+template <typename T>
+inline std::function<void(std::ifstream&, IDataArray::Pointer, uint64_t, uint64_t)> ArrayReaderFactory()
 {
   return ReadArrayFromFile<T>;
 }
@@ -171,7 +179,7 @@ inline std::function<void(std::ifstream&, IDataArray::Pointer, uint64_t, uint64_
 {
   return ReadStringArrayFromFile;
 }
-}
+} // namespace TDMSDataTypeHelpers
 
 class TDMSDataType
 {

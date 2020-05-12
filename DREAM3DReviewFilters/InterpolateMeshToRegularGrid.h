@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #ifndef _interpolatemeshtoregulargrid_h_
 #define _interpolatemeshtoregulargrid_h_
 
@@ -144,7 +144,7 @@ public:
    * @brief getBrandingString Returns the branding string for the filter, which is a tag
    * used to denote the filter's association with specific plugins
    * @return Branding string
-  */
+   */
   QString getBrandingString() const override;
 
   /**
@@ -190,14 +190,14 @@ public:
   void execute() override;
 
   /**
-  * @brief getUuid Return the unique identifier for this filter.
-  * @return A QUuid object.
-  */
+   * @brief getUuid Return the unique identifier for this filter.
+   * @return A QUuid object.
+   */
   QUuid getUuid() const override;
 
 signals:
   /**
-    * @brief updateFilterParameters Emitted when the Filter requests all the latest Filter parameters
+   * @brief updateFilterParameters Emitted when the Filter requests all the latest Filter parameters
    * be pushed from a user-facing control (such as a widget)
    * @param filter Filter instance pointer
    */

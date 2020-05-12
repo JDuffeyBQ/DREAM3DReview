@@ -253,7 +253,6 @@ public:
    */
   void execute() override;
 
-
 protected:
   LocalDislocationDensityCalculator();
 

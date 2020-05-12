@@ -1,37 +1,37 @@
 /* ============================================================================
-* Copyright (c) 2009-2016 BlueQuartz Software, LLC
-*
-* Redistribution and use in source and binary forms, with or without modification,
-* are permitted provided that the following conditions are met:
-*
-* Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* Redistributions in binary form must reproduce the above copyright notice, this
-* list of conditions and the following disclaimer in the documentation and/or
-* other materials provided with the distribution.
-*
-* Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
-* contributors may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-* USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The code contained herein was partially funded by the followig contracts:
-*    United States Air Force Prime Contract FA8650-07-D-5800
-*    United States Air Force Prime Contract FA8650-10-D-5210
-*    United States Prime Contract Navy N00173-07-C-2068
-*
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Copyright (c) 2009-2016 BlueQuartz Software, LLC
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
+ * contributors may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The code contained herein was partially funded by the followig contracts:
+ *    United States Air Force Prime Contract FA8650-07-D-5800
+ *    United States Air Force Prime Contract FA8650-10-D-5210
+ *    United States Prime Contract Navy N00173-07-C-2068
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #include "DBSCAN.h"
 
 #include <QtCore/QTextStream>
@@ -79,8 +79,7 @@ DBSCAN::DBSCAN()
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-DBSCAN::~DBSCAN()
-= default;
+DBSCAN::~DBSCAN() = default;
 
 // -----------------------------------------------------------------------------
 //
@@ -159,68 +158,55 @@ void DBSCAN::dataCheck()
 
   switch(attrMatType)
   {
-  case AttributeMatrix::Type::Vertex:
-  {
+  case AttributeMatrix::Type::Vertex: {
     destAttrMatType = AttributeMatrix::Type::VertexFeature;
     break;
   }
-  case AttributeMatrix::Type::Edge:
-  {
+  case AttributeMatrix::Type::Edge: {
     destAttrMatType = AttributeMatrix::Type::EdgeFeature;
     break;
   }
-  case AttributeMatrix::Type::Face:
-  {
+  case AttributeMatrix::Type::Face: {
     destAttrMatType = AttributeMatrix::Type::FaceFeature;
     break;
   }
-  case AttributeMatrix::Type::Cell:
-  {
+  case AttributeMatrix::Type::Cell: {
     destAttrMatType = AttributeMatrix::Type::CellFeature;
     break;
   }
-  case AttributeMatrix::Type::VertexFeature:
-  {
+  case AttributeMatrix::Type::VertexFeature: {
     destAttrMatType = AttributeMatrix::Type::VertexEnsemble;
     break;
   }
-  case AttributeMatrix::Type::EdgeFeature:
-  {
+  case AttributeMatrix::Type::EdgeFeature: {
     destAttrMatType = AttributeMatrix::Type::EdgeEnsemble;
     break;
   }
-  case AttributeMatrix::Type::FaceFeature:
-  {
+  case AttributeMatrix::Type::FaceFeature: {
     destAttrMatType = AttributeMatrix::Type::FaceEnsemble;
     break;
   }
-  case AttributeMatrix::Type::CellFeature:
-  {
+  case AttributeMatrix::Type::CellFeature: {
     destAttrMatType = AttributeMatrix::Type::CellEnsemble;
     break;
   }
-  case AttributeMatrix::Type::VertexEnsemble:
-  {
+  case AttributeMatrix::Type::VertexEnsemble: {
     destAttrMatType = AttributeMatrix::Type::VertexEnsemble;
     break;
   }
-  case AttributeMatrix::Type::EdgeEnsemble:
-  {
+  case AttributeMatrix::Type::EdgeEnsemble: {
     destAttrMatType = AttributeMatrix::Type::EdgeEnsemble;
     break;
   }
-  case AttributeMatrix::Type::FaceEnsemble:
-  {
+  case AttributeMatrix::Type::FaceEnsemble: {
     destAttrMatType = AttributeMatrix::Type::FaceEnsemble;
     break;
   }
-  case AttributeMatrix::Type::CellEnsemble:
-  {
+  case AttributeMatrix::Type::CellEnsemble: {
     destAttrMatType = AttributeMatrix::Type::CellEnsemble;
     break;
   }
-  default:
-  {
+  default: {
     destAttrMatType = AttributeMatrix::Type::Generic;
     break;
   }
@@ -243,16 +229,14 @@ void DBSCAN::dataCheck()
   std::vector<size_t> cDims(1, 1);
   QVector<DataArrayPath> dataArrayPaths;
 
-  m_InDataPtr =
-      getDataContainerArray()->getPrereqIDataArrayFromPath(this, getSelectedArrayPath()); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_InDataPtr = getDataContainerArray()->getPrereqIDataArrayFromPath(this, getSelectedArrayPath()); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(getErrorCode() >= 0)
   {
     dataArrayPaths.push_back(getSelectedArrayPath());
   }
 
   DataArrayPath path(getSelectedArrayPath().getDataContainerName(), getSelectedArrayPath().getAttributeMatrixName(), getFeatureIdsArrayName());
-  m_FeatureIdsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(
-      this, path, 0, cDims);                  /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_FeatureIdsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, path, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_FeatureIdsPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_FeatureIds = m_FeatureIdsPtr.lock()->getPointer(0);
@@ -260,9 +244,8 @@ void DBSCAN::dataCheck()
 
   if(m_UseMask)
   {
-    m_MaskPtr =
-        getDataContainerArray()->getPrereqArrayFromPath<BoolArrayType>(this, getMaskArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-    if(nullptr != m_MaskPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+    m_MaskPtr = getDataContainerArray()->getPrereqArrayFromPath<BoolArrayType>(this, getMaskArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+    if(nullptr != m_MaskPtr.lock())                                                                              /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
     {
       m_Mask = m_MaskPtr.lock()->getPointer(0);
     } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -274,7 +257,6 @@ void DBSCAN::dataCheck()
 
   getDataContainerArray()->validateNumberOfTuples(this, dataArrayPaths);
 }
-
 
 // -----------------------------------------------------------------------------
 //
@@ -316,7 +298,6 @@ void DBSCAN::execute()
 
   std::vector<size_t> tDims(1, maxCluster + 1);
   featAttrMat->resizeAttributeArrays(tDims);
-
 }
 
 // -----------------------------------------------------------------------------

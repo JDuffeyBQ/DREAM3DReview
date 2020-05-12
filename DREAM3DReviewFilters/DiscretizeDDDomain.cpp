@@ -212,7 +212,6 @@ void DiscretizeDDDomain::dataCheck()
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------

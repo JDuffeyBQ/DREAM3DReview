@@ -22,17 +22,17 @@ DREAM3DReviewPlugin::DREAM3DReviewPlugin()
 , m_CompatibilityVersion(DREAM3DReview::Version::Package())
 , m_Vendor("Open-Source")
 , // Initialize DREAM3DReview's Vendor Name Here
-    m_URL("http://www.github.com/dream3d/DREAM3DReview")
+m_URL("http://www.github.com/dream3d/DREAM3DReview")
 , // Initialize Company URL Here
-    m_Location("")
+m_Location("")
 , // Initialize DREAM3DReview library Location Here
-    m_Description("Staging plugin for filters that are ready to be incorporated into official DREAM.3D plugin repositories")
+m_Description("Staging plugin for filters that are ready to be incorporated into official DREAM.3D plugin repositories")
 , // Initialize DREAM3DReview's Description Here
-    m_Copyright("Copyright is assigned by Filter")
+m_Copyright("Copyright is assigned by Filter")
 , // Initialize DREAM3DReview's Copyright Here
-    m_Filters(QList<QString>())
+m_Filters(QList<QString>())
 , // Initialize DREAM3DReview's List of Dependencies Here
-    m_DidLoad(false)
+m_DidLoad(false)
 {
 }
 

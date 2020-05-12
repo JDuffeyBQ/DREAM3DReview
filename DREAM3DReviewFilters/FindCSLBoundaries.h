@@ -55,7 +55,6 @@
 
 #include "DREAM3DReview/DREAM3DReviewDLLExport.h"
 
-
 class LaueOps;
 using LaueOpsShPtrType = std::shared_ptr<LaueOps>;
 using LaueOpsContainer = std::vector<LaueOpsShPtrType>;
@@ -313,7 +312,7 @@ private:
   QString m_SurfaceMeshCSLBoundaryArrayName = {};
   QString m_SurfaceMeshCSLBoundaryIncoherenceArrayName = {};
 
-  LaueOpsContainer m_OrientationOps;  
+  LaueOpsContainer m_OrientationOps;
   CubicOps::Pointer m_CubicOps;
   HexagonalOps::Pointer m_HexOps;
   OrthoRhombicOps::Pointer m_OrthoOps;

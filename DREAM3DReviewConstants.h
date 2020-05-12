@@ -93,8 +93,6 @@ const int MaxStepNumber = 999999;
 } // namespace ImportMassifData
 } // namespace MASSIFUtilitiesConstants
 
-
-
 namespace AnisotropyConstants
 {
 const QString AnisotropyPluginFile("AnisotropyPlugin");
@@ -177,7 +175,7 @@ using Int64SliceType = itk::Image<Int64PixelType, SliceDimension>;
 using UInt64SliceType = itk::Image<UInt64PixelType, SliceDimension>;
 using FloatSliceType = itk::Image<FloatPixelType, SliceDimension>;
 using DoubleSliceType = itk::Image<DoublePixelType, SliceDimension>;
-}
+} // namespace AnisotropyConstants
 
 /**
  * @brief This namespace is used to define some Constants for the plugin itself.
@@ -192,7 +190,7 @@ namespace FilterGroups
 {
 const QString HEDMAnalysisFilters("HEDM Analysis");
 }
-}
+} // namespace HEDMAnalysisConstants
 
 /**
  * @brief This namespace is used to define some Constants for the plugin itself.
@@ -284,9 +282,9 @@ const QString PackingFilters("Packing");
 } // namespace UUtahDMREFConstants
 
 /**
-* @brief Use this namespace to define any custom GUI widgets that collect FilterParameters
-* for a filter. Do NOT define general reusable widgets here.
-*/
+ * @brief Use this namespace to define any custom GUI widgets that collect FilterParameters
+ * for a filter. Do NOT define general reusable widgets here.
+ */
 namespace FilterParameterWidgetType
 {
 /* const QString SomeCustomWidget("SomeCustomWidget"); */

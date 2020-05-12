@@ -184,15 +184,15 @@ void IdentifyDislocationSegments::dataCheck()
 
   // Get the name and create the array in the new data attrMat
   std::vector<size_t> dims(1, 3);
-  m_BurgersVectorsPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getBurgersVectorsArrayPath(),
-                                                                                                          dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_BurgersVectorsPtr.lock())                                                                      /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_BurgersVectorsPtr =
+      getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getBurgersVectorsArrayPath(), dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_BurgersVectorsPtr.lock())                                                                        /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_BurgersVectors = m_BurgersVectorsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
-  m_SlipPlaneNormalsPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getSlipPlaneNormalsArrayPath(),
-                                                                                                            dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_SlipPlaneNormalsPtr.lock())                                                                      /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_SlipPlaneNormalsPtr =
+      getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getSlipPlaneNormalsArrayPath(), dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_SlipPlaneNormalsPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_SlipPlaneNormals = m_SlipPlaneNormalsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -210,7 +210,6 @@ void IdentifyDislocationSegments::dataCheck()
     m_Active = m_ActivePtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 }
-
 
 // -----------------------------------------------------------------------------
 //

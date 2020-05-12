@@ -217,7 +217,6 @@ public:
    */
   void execute() override;
 
-
 protected:
   IdentifyDislocationSegments();
 

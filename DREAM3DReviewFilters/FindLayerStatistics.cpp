@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #include "FindLayerStatistics.h"
 
 #ifdef SIMPLib_USE_PARALLEL_ALGORITHMS
@@ -41,7 +41,8 @@
  * @brief The CalcProjectedStatsImpl class implements a templated threaded algorithm for
  * determining the projected image statistics of a given volume.
  */
-template <typename T> class CalcLayerStatsImpl
+template <typename T>
+class CalcLayerStatsImpl
 {
 
 public:
@@ -277,54 +278,47 @@ void FindLayerStatistics::dataCheck()
 
   std::vector<size_t> cDims(1, 1);
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getSelectedArrayPath().getAttributeMatrixName(), getLayerIDsArrayName());
-  m_LayerIDsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, tempPath, 0,
-                                                                                                                     cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerIDsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerIDsPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerIDs = m_LayerIDsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getLayerAttributeMatrixName(), getLayerMinArrayName());
-  m_LayerMinPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                 cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerMinPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerMinPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerMin = m_LayerMinPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getLayerAttributeMatrixName(), getLayerMaxArrayName());
-  m_LayerMaxPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                 cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerMaxPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerMaxPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerMax = m_LayerMaxPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getLayerAttributeMatrixName(), getLayerAvgArrayName());
-  m_LayerAvgPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                 cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerAvgPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerAvgPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerAvg = m_LayerAvgPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getLayerAttributeMatrixName(), getLayerStdArrayName());
-  m_LayerStdPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                 cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerStdPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerStdPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerStd = m_LayerStdPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getSelectedArrayPath().getDataContainerName(), getLayerAttributeMatrixName(), getLayerVarArrayName());
-  m_LayerVarPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                 cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_LayerVarPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_LayerVarPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_LayerVar = m_LayerVarPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 }
-
 
 // -----------------------------------------------------------------------------
 //

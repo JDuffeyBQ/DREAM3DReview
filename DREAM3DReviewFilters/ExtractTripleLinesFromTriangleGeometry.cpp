@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "ExtractTripleLinesFromTriangleGeometry.h"
 
@@ -39,7 +39,8 @@
 
 namespace
 {
-template <class T> inline void hashCombine(size_t& seed, const T& obj)
+template <class T>
+inline void hashCombine(size_t& seed, const T& obj)
 {
   std::hash<T> hasher;
   seed ^= hasher(obj) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -71,7 +72,7 @@ struct EdgeHasher
 
 using VertexMap = std::unordered_map<Vertex, MeshIndexType, VertexHasher>;
 using EdgeMap = std::unordered_map<Edge, MeshIndexType, EdgeHasher>;
-}
+} // namespace
 
 // -----------------------------------------------------------------------------
 //
@@ -138,9 +139,8 @@ void ExtractTripleLinesFromTriangleGeometry::dataCheck()
   dataArrays.push_back(triangle->getVertices());
 
   std::vector<size_t> cDims(1, 1);
-  m_NodeTypesPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<int8_t>>(this, getNodeTypesArrayPath(),
-                                                                                                      cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_NodeTypesPtr.lock().get())                                                                  /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_NodeTypesPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<int8_t>>(this, getNodeTypesArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_NodeTypesPtr.lock().get()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_NodeTypes = m_NodeTypesPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -169,7 +169,6 @@ void ExtractTripleLinesFromTriangleGeometry::dataCheck()
   DataArrayPath path(getEdgeGeometry(), getVertexAttributeMatrixName(), getNodeTypesArrayName());
   m_TripleLineNodeTypesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<Int8ArrayType>(this, path, 0, cDims);
 }
-
 
 // -----------------------------------------------------------------------------
 //

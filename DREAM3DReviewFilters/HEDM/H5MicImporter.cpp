@@ -51,7 +51,6 @@
 using namespace H5Support_NAMESPACE;
 #endif
 
-
 #define CHECK_FOR_CANCELED(AClass)                                                                                                                                                                     \
   if(m_Cancel == true)                                                                                                                                                                                 \
   {                                                                                                                                                                                                    \

@@ -26,41 +26,41 @@ public:
   virtual ~DREAM3DReviewPlugin();
 
   /**
-  * @brief Returns the name of the plugin that appears on the file system. 
-  * 
-  * Note that if the build is a debug build there will be a _Plugin postfix
-  * to the filename.
-  */
+   * @brief Returns the name of the plugin that appears on the file system.
+   *
+   * Note that if the build is a debug build there will be a _Plugin postfix
+   * to the filename.
+   */
   virtual QString getPluginFileName();
-  
+
   /**
-  * @brief getPluginDisplayName The name that should be used for human facing
-  * labels and display strings
-  * @return 
-  */
+   * @brief getPluginDisplayName The name that should be used for human facing
+   * labels and display strings
+   * @return
+   */
   virtual QString getPluginDisplayName();
-  
+
   /**
-  * @brief getPluginBaseName The Name of the plugin.
-  * 
-  * This typically will NOT have the Plugin suffix.
-  * @return 
-  */
+   * @brief getPluginBaseName The Name of the plugin.
+   *
+   * This typically will NOT have the Plugin suffix.
+   * @return
+   */
   virtual QString getPluginBaseName();
-    
+
   /**
    * @brief getVersion Returns the version
    */
   virtual QString getVersion();
 
   /**
-  * @brief getCompatibilityVersion Returns the compatibility version
-  */
+   * @brief getCompatibilityVersion Returns the compatibility version
+   */
   virtual QString getCompatibilityVersion();
 
   /**
-  * @brief getVendor Returns the name of the vendor
-  */
+   * @brief getVendor Returns the name of the vendor
+   */
   virtual QString getVendor();
 
   /**
@@ -128,9 +128,9 @@ public:
   virtual void registerFilterWidgets(FilterWidgetManager* fwm);
 
   /**
-  * @brief registerFilters Registers the filters that this plugin implements with the Filter Manager that is passed in
-  * @param fm FilterManager instance pointer
-  */
+   * @brief registerFilters Registers the filters that this plugin implements with the Filter Manager that is passed in
+   * @param fm FilterManager instance pointer
+   */
   virtual void registerFilters(FilterManager* fm);
 
   /**
@@ -160,4 +160,3 @@ private:
   DREAM3DReviewPlugin(const DREAM3DReviewPlugin&) = delete; // Copy Constructor Not Implemented
   void operator=(const DREAM3DReviewPlugin&) = delete;      // Move assignment Not Implemented
 };
-

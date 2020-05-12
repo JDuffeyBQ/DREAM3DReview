@@ -221,8 +221,7 @@ void LocalDislocationDensityCalculator::dataCheck()
   // We MUST also have the domain bounds of the edge data container
   std::vector<size_t> dims(1, 6);
   tempPath.update(getEdgeDataContainerName().getDataContainerName(), "_MetaData", "DomainBounds");
-  m_DomainBoundsPtr =
-      getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, tempPath, dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_DomainBoundsPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, tempPath, dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_DomainBoundsPtr.lock())                                                                      /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_DomainBounds = m_DomainBoundsPtr.lock()->getPointer(0);
@@ -249,15 +248,15 @@ void LocalDislocationDensityCalculator::dataCheck()
 
   // Get the name and create the array in the new data attrMat
   dims[0] = 3;
-  m_BurgersVectorsPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getBurgersVectorsArrayPath(),
-                                                                                                          dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_BurgersVectorsPtr.lock())                                                                      /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_BurgersVectorsPtr =
+      getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getBurgersVectorsArrayPath(), dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_BurgersVectorsPtr.lock())                                                                        /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_BurgersVectors = m_BurgersVectorsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
-  m_SlipPlaneNormalsPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getSlipPlaneNormalsArrayPath(),
-                                                                                                            dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_SlipPlaneNormalsPtr.lock())                                                                      /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_SlipPlaneNormalsPtr =
+      getDataContainerArray()->getPrereqArrayFromPath<DataArray<float>>(this, getSlipPlaneNormalsArrayPath(), dims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_SlipPlaneNormalsPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_SlipPlaneNormals = m_SlipPlaneNormalsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -276,7 +275,6 @@ void LocalDislocationDensityCalculator::dataCheck()
     m_DominantSystemArray = m_DominantSystemArrayPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 }
-
 
 // -----------------------------------------------------------------------------
 //

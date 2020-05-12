@@ -70,13 +70,13 @@
  */
 class FindEuclideanMap2
 {
-	DataContainer::Pointer m;
-	int32_t* m_FeatureIds;
-	int32_t* m_NearestNeighbors;
-	float* m_GBEuclideanDistances;
-	float* m_TJEuclideanDistances;
-	float* m_QPEuclideanDistances;
-	int32_t mapType;
+  DataContainer::Pointer m;
+  int32_t* m_FeatureIds;
+  int32_t* m_NearestNeighbors;
+  float* m_GBEuclideanDistances;
+  float* m_TJEuclideanDistances;
+  float* m_QPEuclideanDistances;
+  int32_t mapType;
 
 public:
   FindEuclideanMap2(const DataContainer::Pointer& datacontainer, int32_t* fIds, int32_t* nearNeighs, float* gbDists, float* tjDists, float* qpDists, int32_t type)
@@ -483,56 +483,56 @@ EstablishFoamMorphology::~EstablishFoamMorphology() = default;
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::initialize()
 {
-	m_Neighbors = nullptr;
-	m_BoundaryCells = nullptr;
+  m_Neighbors = nullptr;
+  m_BoundaryCells = nullptr;
 
-	m_StatsDataArray = StatsDataArray::NullPointer();
+  m_StatsDataArray = StatsDataArray::NullPointer();
 
-	m_ShapeOps = ShapeOps::getShapeOpsQVector();
-	m_UnknownShapeOps = ShapeOps::NullPointer();
-	m_CubicOctohedronOps = ShapeOps::NullPointer();
-	m_CylinderOps = ShapeOps::NullPointer();
-	m_EllipsoidOps = ShapeOps::NullPointer();
-	m_SuperEllipsoidOps = ShapeOps::NullPointer();
-	m_OrthoOps = OrthoRhombicOps::New();
+  m_ShapeOps = ShapeOps::getShapeOpsQVector();
+  m_UnknownShapeOps = ShapeOps::NullPointer();
+  m_CubicOctohedronOps = ShapeOps::NullPointer();
+  m_CylinderOps = ShapeOps::NullPointer();
+  m_EllipsoidOps = ShapeOps::NullPointer();
+  m_SuperEllipsoidOps = ShapeOps::NullPointer();
+  m_OrthoOps = OrthoRhombicOps::New();
 
-	m_ColumnList.clear();
-	m_RowList.clear();
-	m_PlaneList.clear();
-	m_EllipFuncList.clear();
+  m_ColumnList.clear();
+  m_RowList.clear();
+  m_PlaneList.clear();
+  m_EllipFuncList.clear();
 
-	m_PointsToAdd.clear();
-	m_PointsToRemove.clear();
-	m_Seed = QDateTime::currentMSecsSinceEpoch();
-	m_FirstFoamFeature = 1;
-	m_SizeX = m_SizeY = m_SizeZ = m_TotalVol = 0.0f;
-	m_TotalVol = 1.0f;
-	m_HalfPackingRes[0] = m_HalfPackingRes[1] = m_HalfPackingRes[2] = 1.0f;
-	m_OneOverPackingRes[0] = m_OneOverPackingRes[1] = m_OneOverPackingRes[2] = 1.0f;
-	m_OneOverHalfPackingRes[0] = m_OneOverHalfPackingRes[1] = m_OneOverHalfPackingRes[2] = 1.0f;
-	m_PackingRes[0] = m_PackingRes[1] = m_PackingRes[2] = 1.0f;
+  m_PointsToAdd.clear();
+  m_PointsToRemove.clear();
+  m_Seed = QDateTime::currentMSecsSinceEpoch();
+  m_FirstFoamFeature = 1;
+  m_SizeX = m_SizeY = m_SizeZ = m_TotalVol = 0.0f;
+  m_TotalVol = 1.0f;
+  m_HalfPackingRes[0] = m_HalfPackingRes[1] = m_HalfPackingRes[2] = 1.0f;
+  m_OneOverPackingRes[0] = m_OneOverPackingRes[1] = m_OneOverPackingRes[2] = 1.0f;
+  m_OneOverHalfPackingRes[0] = m_OneOverHalfPackingRes[1] = m_OneOverHalfPackingRes[2] = 1.0f;
+  m_PackingRes[0] = m_PackingRes[1] = m_PackingRes[2] = 1.0f;
 
-	m_PackingPoints[0] = m_PackingPoints[1] = m_PackingPoints[2] = 1;
-	m_TotalPackingPoints = 1;
+  m_PackingPoints[0] = m_PackingPoints[1] = m_PackingPoints[2] = 1;
+  m_TotalPackingPoints = 1;
 
-	m_FeatureSizeDist.clear();
-	m_SimFeatureSizeDist.clear();
-	m_NeighborDist.clear();
-	m_SimNeighborDist.clear();
+  m_FeatureSizeDist.clear();
+  m_SimFeatureSizeDist.clear();
+  m_NeighborDist.clear();
+  m_SimNeighborDist.clear();
 
-	m_FeatureSizeDistStep.clear();
-	m_NeighborDistStep.clear();
+  m_FeatureSizeDistStep.clear();
+  m_NeighborDistStep.clear();
 
-	m_PackQualities.clear();
-	m_GSizes.clear();
+  m_PackQualities.clear();
+  m_GSizes.clear();
 
-	m_PrecipitatePhases.clear();
-	m_PrecipitatePhaseFractions.clear();
+  m_PrecipitatePhases.clear();
+  m_PrecipitatePhaseFractions.clear();
 
-	m_AvailablePointsCount = 1;
-	m_FillingError = m_OldFillingError = 0.0f;
-	m_CurrentNeighborhoodError = m_OldNeighborhoodError = 0.0f;
-	m_CurrentSizeDistError = m_OldSizeDistError = 0.0f;
+  m_AvailablePointsCount = 1;
+  m_FillingError = m_OldFillingError = 0.0f;
+  m_CurrentNeighborhoodError = m_OldNeighborhoodError = 0.0f;
+  m_CurrentSizeDistError = m_OldSizeDistError = 0.0f;
 }
 
 // -----------------------------------------------------------------------------
@@ -564,7 +564,7 @@ void EstablishFoamMorphology::setupFilterParameters()
         DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::UInt32, 1, AttributeMatrix::Type::CellEnsemble, IGeometry::Type::Any);
     IGeometry::Types geomTypes;
     req.dcGeometryTypes = geomTypes;
-	  parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Phase Types", InputPhaseTypesArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req));
+    parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Phase Types", InputPhaseTypesArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req));
   }
   {
     DataArraySelectionFilterParameter::RequirementType req =
@@ -574,20 +574,19 @@ void EstablishFoamMorphology::setupFilterParameters()
     parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Phase Names", InputPhaseNamesArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req));
   }
   {
-	  DataArraySelectionFilterParameter::RequirementType req =
-		  DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::UInt32, 1, AttributeMatrix::Type::CellEnsemble, IGeometry::Type::Any);
-	  IGeometry::Types geomTypes;
-	  geomTypes.push_back(IGeometry::Type::Image);
-	  geomTypes.push_back(IGeometry::Type::Unknown);
-	  req.dcGeometryTypes = geomTypes;
-	  parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Shape Types", InputShapeTypesArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req));
+    DataArraySelectionFilterParameter::RequirementType req =
+        DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::UInt32, 1, AttributeMatrix::Type::CellEnsemble, IGeometry::Type::Any);
+    IGeometry::Types geomTypes;
+    geomTypes.push_back(IGeometry::Type::Image);
+    geomTypes.push_back(IGeometry::Type::Unknown);
+    req.dcGeometryTypes = geomTypes;
+    parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Shape Types", InputShapeTypesArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req));
   }
 
   parameters.push_back(SeparatorFilterParameter::New("Cell Data", FilterParameter::RequiredArray));
   {
-	  DataArraySelectionFilterParameter::RequirementType req =
-		DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::Int32, 1, AttributeMatrix::Type::Cell, IGeometry::Type::Image);
-	  parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Feature Ids", InputCellFeatureIdsArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req, 1));
+    DataArraySelectionFilterParameter::RequirementType req = DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::Int32, 1, AttributeMatrix::Type::Cell, IGeometry::Type::Image);
+    parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Feature Ids", InputCellFeatureIdsArrayPath, FilterParameter::RequiredArray, EstablishFoamMorphology, req, 1));
   }
 
   parameters.push_back(SeparatorFilterParameter::New("Cell Ensemble Data", FilterParameter::CreatedArray));
@@ -611,23 +610,23 @@ void EstablishFoamMorphology::setupFilterParameters()
   parameters.push_back(SIMPL_NEW_OUTPUT_FILE_FP("Goal Attribute CSV File", CsvOutputFile, FilterParameter::Parameter, EstablishFoamMorphology, "*.csv", "Comma Separated Data"));
   linkedProps.clear();
   linkedProps << "FeatureIdsArrayName"
-	  << "InputCellFeatureIdsArrayPath";
+              << "InputCellFeatureIdsArrayPath";
   {
-	  LinkedChoicesFilterParameter::Pointer parameter = LinkedChoicesFilterParameter::New();
-	  parameter->setHumanLabel("Already Have Features");
-	  parameter->setPropertyName("HaveFeatures");
-	  parameter->setSetterCallback(SIMPL_BIND_SETTER(EstablishFoamMorphology, this, HaveFeatures));
-	  parameter->setGetterCallback(SIMPL_BIND_GETTER(EstablishFoamMorphology, this, HaveFeatures));
+    LinkedChoicesFilterParameter::Pointer parameter = LinkedChoicesFilterParameter::New();
+    parameter->setHumanLabel("Already Have Features");
+    parameter->setPropertyName("HaveFeatures");
+    parameter->setSetterCallback(SIMPL_BIND_SETTER(EstablishFoamMorphology, this, HaveFeatures));
+    parameter->setGetterCallback(SIMPL_BIND_GETTER(EstablishFoamMorphology, this, HaveFeatures));
 
-	  parameter->setDefaultValue(getHaveFeatures()); // Just set the first index
-	  QVector<QString> choices;
-	  choices.push_back("No");
-	  choices.push_back("Yes");
-	  parameter->setChoices(choices);
-	  parameter->setLinkedProperties(linkedProps);
-	  parameter->setEditable(false);
-	  parameter->setCategory(FilterParameter::Parameter);
-	  parameters.push_back(parameter);
+    parameter->setDefaultValue(getHaveFeatures()); // Just set the first index
+    QVector<QString> choices;
+    choices.push_back("No");
+    choices.push_back("Yes");
+    parameter->setChoices(choices);
+    parameter->setLinkedProperties(linkedProps);
+    parameter->setEditable(false);
+    parameter->setCategory(FilterParameter::Parameter);
+    parameters.push_back(parameter);
   }
   parameters.push_back(SIMPL_NEW_DOUBLE_FP("Minimum Strut Thickness", MinStrutThickness, FilterParameter::Parameter, EstablishFoamMorphology));
   parameters.push_back(SIMPL_NEW_FLOAT_FP("Strut Thickness Variability Factor", StrutThicknessVariability, FilterParameter::Parameter, EstablishFoamMorphology));
@@ -820,46 +819,44 @@ void EstablishFoamMorphology::dataCheck()
   tempPath = getOutputCellAttributeMatrixPath();
   tempPath.setAttributeMatrixName(getOutputCellEnsembleAttributeMatrixName());
   tempPath.setDataArrayName(SIMPL::EnsembleData::PhaseName);
-  m_PhaseNamesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<StringDataArray>(this, tempPath, nullptr,
-                                                                                                                    cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_PhaseNamesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<StringDataArray>(this, tempPath, nullptr, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellAttributeMatrixPath().getAttributeMatrixName(), m_GBEuclideanDistancesArrayName);
-  m_GBEuclideanDistancesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, tempPath, -1, cDims);                 /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_GBEuclideanDistancesPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_GBEuclideanDistancesPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, -1, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_GBEuclideanDistancesPtr.lock())                                                         /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_GBEuclideanDistances = m_GBEuclideanDistancesPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellAttributeMatrixPath().getAttributeMatrixName(), getTJEuclideanDistancesArrayName());
-  m_TJEuclideanDistancesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, tempPath, -1, cDims);                 /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_TJEuclideanDistancesPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_TJEuclideanDistancesPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, -1, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_TJEuclideanDistancesPtr.lock())                                                         /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_TJEuclideanDistances = m_TJEuclideanDistancesPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellAttributeMatrixPath().getAttributeMatrixName(), getQPEuclideanDistancesArrayName());
-  m_QPEuclideanDistancesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, tempPath, -1, cDims);                 /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_QPEuclideanDistancesPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_QPEuclideanDistancesPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, -1, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_QPEuclideanDistancesPtr.lock())                                                         /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_QPEuclideanDistances = m_QPEuclideanDistancesPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   cDims[0] = 3;
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellAttributeMatrixPath().getAttributeMatrixName(), m_NearestNeighborsArrayName);
-  m_NearestNeighborsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(
-      this, tempPath, 0, cDims);              /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_NearestNeighborsPtr.lock()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_NearestNeighborsPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_NearestNeighborsPtr.lock())                                                              /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_NearestNeighbors = m_NearestNeighborsPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
 
   // Feature Data
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_FeaturePhasesArrayName);
-  m_FeaturePhasesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(
-      this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_FeaturePhasesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_FeaturePhasesPtr.lock())
   {
     m_FeaturePhases = m_FeaturePhasesPtr.lock()->getPointer(0);
@@ -873,24 +870,22 @@ void EstablishFoamMorphology::dataCheck()
   }
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_EquivalentDiametersArrayName);
-  m_EquivalentDiametersPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_EquivalentDiametersPtr =
+      getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_EquivalentDiametersPtr.lock())
   {
     m_EquivalentDiameters = m_EquivalentDiametersPtr.lock()->getPointer(0);
   }
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_VolumesArrayName);
-  m_VolumesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_VolumesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_VolumesPtr.lock())
   {
     m_Volumes = m_VolumesPtr.lock()->getPointer(0);
   }
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_Omega3sArrayName);
-  m_Omega3sPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_Omega3sPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_Omega3sPtr.lock())
   {
     m_Omega3s = m_Omega3sPtr.lock()->getPointer(0);
@@ -898,24 +893,21 @@ void EstablishFoamMorphology::dataCheck()
 
   cDims[0] = 3;
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_CentroidsArrayName);
-  m_CentroidsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                  cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_CentroidsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_CentroidsPtr.lock())
   {
     m_Centroids = m_CentroidsPtr.lock()->getPointer(0);
   }
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_AxisEulerAnglesArrayName);
-  m_AxisEulerAnglesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(
-      this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_AxisEulerAnglesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_AxisEulerAnglesPtr.lock())
   {
     m_AxisEulerAngles = m_AxisEulerAnglesPtr.lock()->getPointer(0);
   }
 
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellFeatureAttributeMatrixName(), m_AxisLengthsArrayName);
-  m_AxisLengthsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0,
-                                                                                                                    cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_AxisLengthsPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<float>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_AxisLengthsPtr.lock())
   {
     m_AxisLengths = m_AxisLengthsPtr.lock()->getPointer(0);
@@ -924,8 +916,7 @@ void EstablishFoamMorphology::dataCheck()
   // Ensemble Data
   cDims[0] = 1;
   tempPath.update(getOutputCellAttributeMatrixPath().getDataContainerName(), getOutputCellEnsembleAttributeMatrixName(), getNumFeaturesArrayName());
-  m_NumFeaturesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(
-      this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  m_NumFeaturesPtr = getDataContainerArray()->createNonPrereqArrayFromPath<DataArray<int32_t>>(this, tempPath, 0, cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
   if(nullptr != m_NumFeaturesPtr.lock())
   {
     m_NumFeatures = m_NumFeaturesPtr.lock()->getPointer(0);
@@ -943,41 +934,41 @@ void EstablishFoamMorphology::dataCheck()
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::preflight()
 {
-	setInPreflight(true);
-	emit preflightAboutToExecute();
-	emit updateFilterParameters(this);
-	dataCheck();
-	emit preflightExecuted();
+  setInPreflight(true);
+  emit preflightAboutToExecute();
+  emit updateFilterParameters(this);
+  dataCheck();
+  emit preflightExecuted();
 
-	DataContainer::Pointer dc = getDataContainerArray()->getDataContainer(getOutputCellAttributeMatrixPath());
-	if (dc == nullptr)
-	{
-		setInPreflight(false);
-		return;
-	}
-	AttributeMatrix::Pointer featureAttrMat = dc->getAttributeMatrix(getOutputCellFeatureAttributeMatrixName());
-	if (featureAttrMat == nullptr)
-	{
-		setInPreflight(false);
-		return;
-	}
-	AttributeMatrix::Pointer cellAttrMat = dc->getAttributeMatrix(getOutputCellAttributeMatrixPath().getAttributeMatrixName());
-	if (cellAttrMat == nullptr)
-	{
-		setInPreflight(false);
-		return;
-	}
-	cellAttrMat->removeAttributeArray(m_NearestNeighborsArrayName);
-	featureAttrMat->removeAttributeArray(m_AxisEulerAnglesArrayName);
-	featureAttrMat->removeAttributeArray(m_AxisLengthsArrayName);
-	featureAttrMat->removeAttributeArray(m_CentroidsArrayName);
-	featureAttrMat->removeAttributeArray(m_EquivalentDiametersArrayName);
-	featureAttrMat->removeAttributeArray(m_NeighborhoodsArrayName);
-	featureAttrMat->removeAttributeArray(m_Omega3sArrayName);
-	featureAttrMat->removeAttributeArray(m_FeaturePhasesArrayName);
-	featureAttrMat->removeAttributeArray(m_VolumesArrayName);
+  DataContainer::Pointer dc = getDataContainerArray()->getDataContainer(getOutputCellAttributeMatrixPath());
+  if(dc == nullptr)
+  {
+    setInPreflight(false);
+    return;
+  }
+  AttributeMatrix::Pointer featureAttrMat = dc->getAttributeMatrix(getOutputCellFeatureAttributeMatrixName());
+  if(featureAttrMat == nullptr)
+  {
+    setInPreflight(false);
+    return;
+  }
+  AttributeMatrix::Pointer cellAttrMat = dc->getAttributeMatrix(getOutputCellAttributeMatrixPath().getAttributeMatrixName());
+  if(cellAttrMat == nullptr)
+  {
+    setInPreflight(false);
+    return;
+  }
+  cellAttrMat->removeAttributeArray(m_NearestNeighborsArrayName);
+  featureAttrMat->removeAttributeArray(m_AxisEulerAnglesArrayName);
+  featureAttrMat->removeAttributeArray(m_AxisLengthsArrayName);
+  featureAttrMat->removeAttributeArray(m_CentroidsArrayName);
+  featureAttrMat->removeAttributeArray(m_EquivalentDiametersArrayName);
+  featureAttrMat->removeAttributeArray(m_NeighborhoodsArrayName);
+  featureAttrMat->removeAttributeArray(m_Omega3sArrayName);
+  featureAttrMat->removeAttributeArray(m_FeaturePhasesArrayName);
+  featureAttrMat->removeAttributeArray(m_VolumesArrayName);
 
-	setInPreflight(false);
+  setInPreflight(false);
 }
 
 // -----------------------------------------------------------------------------
@@ -1853,17 +1844,17 @@ void EstablishFoamMorphology::generate_feature(int32_t phase, Feature_t* feature
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::transfer_attributes(int32_t gnum, Feature_t* feature)
 {
-	m_Volumes[gnum] = feature->m_Volumes;
-	m_EquivalentDiameters[gnum] = feature->m_EquivalentDiameters;
-	m_AxisLengths[3 * gnum + 0] = feature->m_AxisLengths[0];
-	m_AxisLengths[3 * gnum + 1] = feature->m_AxisLengths[1];
-	m_AxisLengths[3 * gnum + 2] = feature->m_AxisLengths[2];
-	m_AxisEulerAngles[3 * gnum + 0] = feature->m_AxisEulerAngles[0];
-	m_AxisEulerAngles[3 * gnum + 1] = feature->m_AxisEulerAngles[1];
-	m_AxisEulerAngles[3 * gnum + 2] = feature->m_AxisEulerAngles[2];
-	m_Omega3s[gnum] = feature->m_Omega3s;
-	m_FeaturePhases[gnum] = feature->m_FeaturePhases;
-	m_Neighborhoods[gnum] = feature->m_Neighborhoods;
+  m_Volumes[gnum] = feature->m_Volumes;
+  m_EquivalentDiameters[gnum] = feature->m_EquivalentDiameters;
+  m_AxisLengths[3 * gnum + 0] = feature->m_AxisLengths[0];
+  m_AxisLengths[3 * gnum + 1] = feature->m_AxisLengths[1];
+  m_AxisLengths[3 * gnum + 2] = feature->m_AxisLengths[2];
+  m_AxisEulerAngles[3 * gnum + 0] = feature->m_AxisEulerAngles[0];
+  m_AxisEulerAngles[3 * gnum + 1] = feature->m_AxisEulerAngles[1];
+  m_AxisEulerAngles[3 * gnum + 2] = feature->m_AxisEulerAngles[2];
+  m_Omega3s[gnum] = feature->m_Omega3s;
+  m_FeaturePhases[gnum] = feature->m_FeaturePhases;
+  m_Neighborhoods[gnum] = feature->m_Neighborhoods;
 }
 
 // -----------------------------------------------------------------------------
@@ -2118,12 +2109,12 @@ float EstablishFoamMorphology::check_neighborhooderror(int32_t gadd, int32_t gre
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::compare_1Ddistributions(std::vector<float> array1, std::vector<float> array2, float& bhattdist)
 {
-	bhattdist = 0.0f;
-	size_t array1Size = array1.size();
-	for (size_t i = 0; i < array1Size; i++)
-	{
-		bhattdist = bhattdist + sqrtf((array1[i] * array2[i]));
-	}
+  bhattdist = 0.0f;
+  size_t array1Size = array1.size();
+  for(size_t i = 0; i < array1Size; i++)
+  {
+    bhattdist = bhattdist + sqrtf((array1[i] * array2[i]));
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -2131,16 +2122,16 @@ void EstablishFoamMorphology::compare_1Ddistributions(std::vector<float> array1,
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::compare_2Ddistributions(std::vector<std::vector<float>> array1, std::vector<std::vector<float>> array2, float& bhattdist)
 {
-	bhattdist = 0.0f;
-	size_t array1Size = array1.size();
-	for (size_t i = 0; i < array1Size; i++)
-	{
-		size_t array2Size = array1[i].size();
-		for (size_t j = 0; j < array2Size; j++)
-		{
-			bhattdist = bhattdist + sqrtf((array1[i][j] * array2[i][j]));
-		}
-	}
+  bhattdist = 0.0f;
+  size_t array1Size = array1.size();
+  for(size_t i = 0; i < array1Size; i++)
+  {
+    size_t array2Size = array1[i].size();
+    for(size_t j = 0; j < array2Size; j++)
+    {
+      bhattdist = bhattdist + sqrtf((array1[i][j] * array2[i][j]));
+    }
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -2148,20 +2139,20 @@ void EstablishFoamMorphology::compare_2Ddistributions(std::vector<std::vector<fl
 // -----------------------------------------------------------------------------
 void EstablishFoamMorphology::compare_3Ddistributions(std::vector<std::vector<std::vector<float>>> array1, std::vector<std::vector<std::vector<float>>> array2, float& bhattdist)
 {
-	bhattdist = 0.0f;
-	size_t array1Size = array1.size();
-	for (size_t i = 0; i < array1Size; i++)
-	{
-		size_t array2Size = array1[i].size();
-		for (size_t j = 0; j < array2Size; j++)
-		{
-			size_t array3Size = array1[i][j].size();
-			for (size_t k = 0; k < array3Size; k++)
-			{
-				bhattdist = bhattdist + sqrtf((array1[i][j][k] * array2[i][j][k]));
-			}
-		}
-	}
+  bhattdist = 0.0f;
+  size_t array1Size = array1.size();
+  for(size_t i = 0; i < array1Size; i++)
+  {
+    size_t array2Size = array1[i].size();
+    for(size_t j = 0; j < array2Size; j++)
+    {
+      size_t array3Size = array1[i][j].size();
+      for(size_t k = 0; k < array3Size; k++)
+      {
+        bhattdist = bhattdist + sqrtf((array1[i][j][k] * array2[i][j][k]));
+      }
+    }
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -3423,16 +3414,16 @@ void EstablishFoamMorphology::find_euclideandistmap()
   }
   else
 #endif
-	{
-		for (int32_t i = 0; i < 3; i++)
-		{
-			if ((i == 0) || (i == 1) || (i == 2))
-			{
-				FindEuclideanMap2 f(m, m_FeatureIds, m_NearestNeighbors, m_GBEuclideanDistances, m_TJEuclideanDistances, m_QPEuclideanDistances, i);
-				f();
-			}
-		}
-	}
+  {
+    for(int32_t i = 0; i < 3; i++)
+    {
+      if((i == 0) || (i == 1) || (i == 2))
+      {
+        FindEuclideanMap2 f(m, m_FeatureIds, m_NearestNeighbors, m_GBEuclideanDistances, m_TJEuclideanDistances, m_QPEuclideanDistances, i);
+        f();
+      }
+    }
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -3469,8 +3460,8 @@ QString EstablishFoamMorphology::getBrandingString() const
 // -----------------------------------------------------------------------------
 QString EstablishFoamMorphology::getFilterVersion() const
 {
-	QString version;
-	QTextStream vStream(&version);
+  QString version;
+  QTextStream vStream(&version);
   vStream << DREAM3DReview::Version::Major() << "." << DREAM3DReview::Version::Minor() << "." << DREAM3DReview::Version::Patch();
   return version;
 }
@@ -3496,7 +3487,7 @@ QUuid EstablishFoamMorphology::getUuid() const
 // -----------------------------------------------------------------------------
 QString EstablishFoamMorphology::getSubGroupName() const
 {
-	return SIMPL::FilterSubGroups::PackingFilters;
+  return SIMPL::FilterSubGroups::PackingFilters;
 }
 
 // -----------------------------------------------------------------------------
@@ -3504,7 +3495,7 @@ QString EstablishFoamMorphology::getSubGroupName() const
 // -----------------------------------------------------------------------------
 QString EstablishFoamMorphology::getHumanLabel() const
 {
-	return "Establish Foam Morphology";
+  return "Establish Foam Morphology";
 }
 
 // -----------------------------------------------------------------------------
@@ -3516,7 +3507,7 @@ EstablishFoamMorphology::Pointer EstablishFoamMorphology::NullPointer()
 // -----------------------------------------------------------------------------
 EstablishFoamMorphology::Pointer EstablishFoamMorphology::New()
 {
-  Pointer sharedPtr (new (EstablishFoamMorphology));   
+  Pointer sharedPtr(new(EstablishFoamMorphology));
   return sharedPtr;
 }
 
@@ -3819,5 +3810,3 @@ bool EstablishFoamMorphology::getSmoothStruts() const
 {
   return m_SmoothStruts;
 }
-
-

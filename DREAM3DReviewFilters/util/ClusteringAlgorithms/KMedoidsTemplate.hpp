@@ -1,37 +1,37 @@
 /* ============================================================================
-* Copyright (c) 2009-2016 BlueQuartz Software, LLC
-*
-* Redistribution and use in source and binary forms, with or without modification,
-* are permitted provided that the following conditions are met:
-*
-* Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* Redistributions in binary form must reproduce the above copyright notice, this
-* list of conditions and the following disclaimer in the documentation and/or
-* other materials provided with the distribution.
-*
-* Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
-* contributors may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-* USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The code contained herein was partially funded by the followig contracts:
-*    United States Air Force Prime Contract FA8650-07-D-5800
-*    United States Air Force Prime Contract FA8650-10-D-5210
-*    United States Prime Contract Navy N00173-07-C-2068
-*
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Copyright (c) 2009-2016 BlueQuartz Software, LLC
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of BlueQuartz Software, the US Air Force, nor the names of its
+ * contributors may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The code contained herein was partially funded by the followig contracts:
+ *    United States Air Force Prime Contract FA8650-07-D-5800
+ *    United States Air Force Prime Contract FA8650-10-D-5210
+ *    United States Prime Contract Navy N00173-07-C-2068
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #pragma once
 
@@ -43,7 +43,7 @@
 
 #include "DREAM3DReview/DREAM3DReviewFilters/util/DistanceTemplate.hpp"
 
-template<typename T>
+template <typename T>
 class KMedoidsTemplate
 {
 public:
@@ -90,8 +90,8 @@ public:
   // -----------------------------------------------------------------------------
   //
   // -----------------------------------------------------------------------------
-  void Execute(AbstractFilter* filter, IDataArray::Pointer inputIDataArray, IDataArray::Pointer outputIDataArray, BoolArrayType::Pointer maskDataArray, 
-               size_t numClusters, Int32ArrayType::Pointer fIds, int32_t distMetric)
+  void Execute(AbstractFilter* filter, IDataArray::Pointer inputIDataArray, IDataArray::Pointer outputIDataArray, BoolArrayType::Pointer maskDataArray, size_t numClusters,
+               Int32ArrayType::Pointer fIds, int32_t distMetric)
   {
     typename DataArray<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<DataArray<T>>(inputIDataArray);
     typename DataArray<T>::Pointer outputDataPtr = std::dynamic_pointer_cast<DataArray<T>>(outputIDataArray);
@@ -129,33 +129,29 @@ public:
       }
     }
 
-    //size_t updateCheck = 0;
+    // size_t updateCheck = 0;
     int32_t* fPtr = fIds->getPointer(0);
 
-    findClusters(filter, mask, inputData, outputData, fPtr, 
-                 numTuples, numClusters, numCompDims, distMetric);
+    findClusters(filter, mask, inputData, outputData, fPtr, numTuples, numClusters, numCompDims, distMetric);
 
     std::vector<size_t> optClusterIdxs(clusterIdxs);
     std::vector<double> costs;
 
-    costs = optimizeClusters(filter, mask, inputData, outputData, fPtr, 
-                             numTuples, numClusters, numCompDims, clusterIdxs, distMetric);
+    costs = optimizeClusters(filter, mask, inputData, outputData, fPtr, numTuples, numClusters, numCompDims, clusterIdxs, distMetric);
 
     bool update = optClusterIdxs == clusterIdxs ? false : true;
     size_t iteration = 1;
 
     while(update)
     {
-      findClusters(filter, mask, inputData, outputData, fPtr, 
-                   numTuples, numClusters, numCompDims, distMetric);
+      findClusters(filter, mask, inputData, outputData, fPtr, numTuples, numClusters, numCompDims, distMetric);
 
       optClusterIdxs = clusterIdxs;
 
-      costs = optimizeClusters(filter, mask, inputData, outputData, fPtr, 
-                               numTuples, numClusters, numCompDims, clusterIdxs, distMetric);
+      costs = optimizeClusters(filter, mask, inputData, outputData, fPtr, numTuples, numClusters, numCompDims, clusterIdxs, distMetric);
 
       update = optClusterIdxs == clusterIdxs ? false : true;
-      
+
       double sum = std::accumulate(std::begin(costs), std::end(costs), 0.0);
       QString ss = QObject::tr("Clustering Data || Iteration %1 || Total Cost: %2").arg(iteration).arg(sum);
       filter->notifyStatusMessage(ss);
@@ -167,21 +163,22 @@ private:
   // -----------------------------------------------------------------------------
   //
   // -----------------------------------------------------------------------------
-  void findClusters(AbstractFilter* filter, bool* mask, T* input, T* medoids, int32_t* fIds, 
-                    size_t tuples, int32_t clusters, int32_t dims, int32_t distMetric)
+  void findClusters(AbstractFilter* filter, bool* mask, T* input, T* medoids, int32_t* fIds, size_t tuples, int32_t clusters, int32_t dims, int32_t distMetric)
   {
     double dist = 0.0;
 
-    for(size_t i = 0; i< tuples; i++)
+    for(size_t i = 0; i < tuples; i++)
     {
-      if(filter->getCancel()) { return; }
+      if(filter->getCancel())
+      {
+        return;
+      }
       if(mask[i])
       {
         double minDist = std::numeric_limits<double>::max();
         for(size_t j = 0; j < clusters; j++)
         {
-          dist = DistanceTemplate::GetDistance<T, T, double>(input + (dims * i), medoids + (dims * (j + 1)), 
-                                                             dims, distMetric);
+          dist = DistanceTemplate::GetDistance<T, T, double>(input + (dims * i), medoids + (dims * (j + 1)), dims, distMetric);
           if(dist < minDist)
           {
             minDist = dist;
@@ -195,18 +192,24 @@ private:
   // -----------------------------------------------------------------------------
   //
   // -----------------------------------------------------------------------------
-  std::vector<double> optimizeClusters(AbstractFilter* filter, bool* mask, T* input, T* medoids, int32_t* fIds,
-                        size_t tuples, int32_t clusters, int32_t dims, std::vector<size_t>& clusterIdxs, int32_t distMetric)
+  std::vector<double> optimizeClusters(AbstractFilter* filter, bool* mask, T* input, T* medoids, int32_t* fIds, size_t tuples, int32_t clusters, int32_t dims, std::vector<size_t>& clusterIdxs,
+                                       int32_t distMetric)
   {
     double dist = 0.0;
     std::vector<double> minCosts(clusters, std::numeric_limits<double>::max());
 
     for(size_t i = 0; i < clusters; i++)
     {
-      if(filter->getCancel()) { return std::vector<double>(); }
+      if(filter->getCancel())
+      {
+        return std::vector<double>();
+      }
       for(size_t j = 0; j < tuples; j++)
       {
-        if(filter->getCancel()) { return std::vector<double>(); }
+        if(filter->getCancel())
+        {
+          return std::vector<double>();
+        }
         if(mask[j])
         {
           double cost = 0.0;
@@ -214,11 +217,13 @@ private:
           {
             for(size_t k = 0; k < tuples; k++)
             {
-              if(filter->getCancel()) { return std::vector<double>(); }
+              if(filter->getCancel())
+              {
+                return std::vector<double>();
+              }
               if(fIds[k] == i + 1 && mask[k])
               {
-                dist = DistanceTemplate::GetDistance<T, T, double>(input + (dims * k), input + (dims * j), 
-                                                                   dims, distMetric);
+                dist = DistanceTemplate::GetDistance<T, T, double>(input + (dims * k), input + (dims * j), dims, distMetric);
                 cost += dist;
               }
             }
@@ -247,4 +252,3 @@ private:
   KMedoidsTemplate(const KMedoidsTemplate&); // Copy Constructor Not Implemented
   void operator=(const KMedoidsTemplate&);   // Move assignment Not Implemented
 };
-

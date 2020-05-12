@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered “public domain” (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered “public domain” (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "FindDynamicArrayStatistics.h"
 
@@ -184,11 +184,11 @@ void FindDynamicArrayStatistics::dataCheck()
   getDataContainerArray()->validateNumberOfTuples<AbstractFilter>(this, dataArrayPaths);
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findLength(IDataArray::Pointer source, IDataArray::Pointer length)
+template <typename T>
+void findLength(IDataArray::Pointer source, IDataArray::Pointer length)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<int32_t>::Pointer lengthDataPtr = std::dynamic_pointer_cast<DataArray<int32_t>>(length);
@@ -205,7 +205,8 @@ template <typename T> void findLength(IDataArray::Pointer source, IDataArray::Po
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findMin(IDataArray::Pointer source, IDataArray::Pointer min)
+template <typename T>
+void findMin(IDataArray::Pointer source, IDataArray::Pointer min)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer minDataPtr = std::dynamic_pointer_cast<DataArray<T>>(min);
@@ -227,7 +228,8 @@ template <typename T> void findMin(IDataArray::Pointer source, IDataArray::Point
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findMax(IDataArray::Pointer source, IDataArray::Pointer max)
+template <typename T>
+void findMax(IDataArray::Pointer source, IDataArray::Pointer max)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer maxDataPtr = std::dynamic_pointer_cast<DataArray<T>>(max);
@@ -249,7 +251,8 @@ template <typename T> void findMax(IDataArray::Pointer source, IDataArray::Point
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findMean(IDataArray::Pointer source, IDataArray::Pointer mean)
+template <typename T>
+void findMean(IDataArray::Pointer source, IDataArray::Pointer mean)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer meanDataPtr = std::dynamic_pointer_cast<DataArray<T>>(mean);
@@ -272,7 +275,8 @@ template <typename T> void findMean(IDataArray::Pointer source, IDataArray::Poin
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findMedian(IDataArray::Pointer source, IDataArray::Pointer median)
+template <typename T>
+void findMedian(IDataArray::Pointer source, IDataArray::Pointer median)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer medianDataPtr = std::dynamic_pointer_cast<DataArray<T>>(median);
@@ -305,7 +309,8 @@ template <typename T> void findMedian(IDataArray::Pointer source, IDataArray::Po
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findStdDeviation(IDataArray::Pointer source, IDataArray::Pointer stdDev)
+template <typename T>
+void findStdDeviation(IDataArray::Pointer source, IDataArray::Pointer stdDev)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer stdDevDataPtr = std::dynamic_pointer_cast<DataArray<T>>(stdDev);
@@ -332,7 +337,8 @@ template <typename T> void findStdDeviation(IDataArray::Pointer source, IDataArr
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
-template <typename T> void findSummation(IDataArray::Pointer source, IDataArray::Pointer summation)
+template <typename T>
+void findSummation(IDataArray::Pointer source, IDataArray::Pointer summation)
 {
   typename NeighborList<T>::Pointer inputDataPtr = std::dynamic_pointer_cast<NeighborList<T>>(source);
   typename DataArray<T>::Pointer summationDataPtr = std::dynamic_pointer_cast<DataArray<T>>(summation);

@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "FindMinkowskiBouligandDimension.h"
 
@@ -65,7 +65,8 @@ void FindMinkowskiBouligandDimension::setupFilterParameters()
   DataArraySelectionFilterParameter::RequirementType dasReq = DataArraySelectionFilterParameter::CreateRequirement(SIMPL::TypeNames::Bool, 1, AttributeMatrix::Type::Cell, IGeometry::Type::Image);
   parameters.push_back(SIMPL_NEW_DA_SELECTION_FP("Mask", MaskArrayPath, FilterParameter::RequiredArray, FindMinkowskiBouligandDimension, dasReq));
   parameters.push_back(SIMPL_NEW_AM_WITH_LINKED_DC_FP("Fractal Attribute Matrix", AttributeMatrixName, MaskArrayPath, FilterParameter::CreatedArray, FindMinkowskiBouligandDimension));
-  parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Minkowski-Bouligand Dimension", MinkowskiBouligandDimensionArrayName, MaskArrayPath, AttributeMatrixName, FilterParameter::CreatedArray, FindMinkowskiBouligandDimension));
+  parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Minkowski-Bouligand Dimension", MinkowskiBouligandDimensionArrayName, MaskArrayPath, AttributeMatrixName, FilterParameter::CreatedArray,
+                                                      FindMinkowskiBouligandDimension));
   setFilterParameters(parameters);
 }
 
@@ -116,7 +117,6 @@ void FindMinkowskiBouligandDimension::dataCheck()
     m_MinkowskiBouligandDimension = m_MinkowskiBouligandDimensionPtr.lock()->getPointer(0);
   }
 }
-
 
 // -----------------------------------------------------------------------------
 //

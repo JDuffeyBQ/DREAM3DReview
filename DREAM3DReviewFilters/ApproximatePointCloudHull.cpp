@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "ApproximatePointCloudHull.h"
 
@@ -106,7 +106,6 @@ void ApproximatePointCloudHull::dataCheck()
   dc->setGeometry(vertex);
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
@@ -196,9 +195,7 @@ void ApproximatePointCloudHull::execute()
   int64_t dims[3] = {bboxMax[0] - bboxMin[0] + 1, bboxMax[1] - bboxMin[1] + 1, bboxMax[2] - bboxMin[2] + 1};
   m_SamplingGrid->setDimensions(dims[0], dims[1], dims[2]);
 
-  int64_t multiplier[3] = {1, 
-    static_cast<int64_t>(m_SamplingGrid->getXPoints()), 
-    static_cast<int64_t>(m_SamplingGrid->getXPoints() * m_SamplingGrid->getYPoints())};
+  int64_t multiplier[3] = {1, static_cast<int64_t>(m_SamplingGrid->getXPoints()), static_cast<int64_t>(m_SamplingGrid->getXPoints() * m_SamplingGrid->getYPoints())};
   std::vector<std::vector<int64_t>> vertsInVoxels(m_SamplingGrid->getNumberOfElements());
 
   int64_t progIncrement = numVerts / 100;

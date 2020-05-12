@@ -1,16 +1,16 @@
 /* ============================================================================
-* Software developed by US federal government employees (including military personnel) 
-* as part of their official duties is not subject to copyright protection and is 
-* considered "public domain" (see 17 USC Section 105). Public domain software can be used 
-* by anyone for any purpose, and cannot be released under a copyright license 
-* (including typical open source software licenses).
-* 
-* This source code file was originally written by United States DoD employees. The
-* original source code files are released into the Public Domain.
-* 
-* Subsequent changes to the codes by others may elect to add a copyright and license
-* for those changes.
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ * Software developed by US federal government employees (including military personnel)
+ * as part of their official duties is not subject to copyright protection and is
+ * considered "public domain" (see 17 USC Section 105). Public domain software can be used
+ * by anyone for any purpose, and cannot be released under a copyright license
+ * (including typical open source software licenses).
+ *
+ * This source code file was originally written by United States DoD employees. The
+ * original source code files are released into the Public Domain.
+ *
+ * Subsequent changes to the codes by others may elect to add a copyright and license
+ * for those changes.
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 #include "ExportCLIFile.h"
 
@@ -172,7 +172,6 @@ void ExportCLIFile::dataCheck()
   getDataContainerArray()->validateNumberOfTuples(this, dataArrays);
 }
 
-
 // -----------------------------------------------------------------------------
 //
 // -----------------------------------------------------------------------------
@@ -240,12 +239,13 @@ void ExportCLIFile::execute()
     QString header = "$$HEADERSTART\n"
                      "$$ASCII\n"
                      "$$UNITS/" +
-                     QString::number(m_UnitsScaleFactor, 'f', m_Precision) + "\n"
-                                                                             "$$HEADEREND\n"
-                                                                             "$$GEOMETRYSTART\n"
-                                                                             "\n"
-                                                                             "$$LAYER/0.00000\n"
-                                                                             "\n";
+                     QString::number(m_UnitsScaleFactor, 'f', m_Precision) +
+                     "\n"
+                     "$$HEADEREND\n"
+                     "$$GEOMETRYSTART\n"
+                     "\n"
+                     "$$LAYER/0.00000\n"
+                     "\n";
 
     QTextStream out(f.get());
     out << header;

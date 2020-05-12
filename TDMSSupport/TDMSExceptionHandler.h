@@ -20,7 +20,7 @@ const std::string SegmentChunkMismatch = TDMSMetaDataError + "Meta data for obje
 const std::string UnexpectedArrayDimension = TDMSMetaDataError + "Meta data for object indicates array dimension other than 1; only scalar dimension arrays are supported";
 const std::string UnsupportedDataType = TDMSDataTypeError + "Encountered an unsupported TDMS data type";
 const std::string ObjectMetaDataMismatch = TDMSMetaDataError + "Meta data for same object in multiple segments does not contain matching data type or array dimension";
-}
+} // namespace TDMSExceptionMessages
 
 class NonFatalTDMSException : public std::exception
 {

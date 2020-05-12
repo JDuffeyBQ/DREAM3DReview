@@ -75,8 +75,8 @@ public:
   void RemoveTestFiles()
   {
 #if REMOVE_TEST_FILES
-      // QFile::remove(UnitTest::EstablishFoamMorphologyTest::TestFile1);
-      // QFile::remove(UnitTest::EstablishFoamMorphologyTest::TestFile2);
+    // QFile::remove(UnitTest::EstablishFoamMorphologyTest::TestFile1);
+    // QFile::remove(UnitTest::EstablishFoamMorphologyTest::TestFile2);
 #endif
   }
 

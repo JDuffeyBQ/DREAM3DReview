@@ -14,7 +14,6 @@
 
 #include "InterpolatePointCloudToRegularGrid.h"
 
-
 #include <QtCore/QTextStream>
 
 #include "SIMPLib/Common/Constants.h"
@@ -120,8 +119,10 @@ void InterpolatePointCloudToRegularGrid::setupFilterParameters()
     parameters.push_back(SIMPL_NEW_MDA_SELECTION_FP("Attribute Arrays to Copy", ArraysToCopy, FilterParameter::RequiredArray, InterpolatePointCloudToRegularGrid, req));
   }
   parameters.push_back(SeparatorFilterParameter::New("Cell Data", FilterParameter::CreatedArray));
-  parameters.push_back(SIMPL_NEW_AM_WITH_LINKED_DC_FP("Interpolated Attribute Matrix", InterpolatedAttributeMatrixName, InterpolatedDataContainerName, FilterParameter::CreatedArray, InterpolatePointCloudToRegularGrid));
-  parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Kernel Distances", KernelDistancesArrayName, InterpolatedDataContainerName, InterpolatedAttributeMatrixName, FilterParameter::CreatedArray, InterpolatePointCloudToRegularGrid));
+  parameters.push_back(SIMPL_NEW_AM_WITH_LINKED_DC_FP("Interpolated Attribute Matrix", InterpolatedAttributeMatrixName, InterpolatedDataContainerName, FilterParameter::CreatedArray,
+                                                      InterpolatePointCloudToRegularGrid));
+  parameters.push_back(SIMPL_NEW_DA_WITH_LINKED_AM_FP("Kernel Distances", KernelDistancesArrayName, InterpolatedDataContainerName, InterpolatedAttributeMatrixName, FilterParameter::CreatedArray,
+                                                      InterpolatePointCloudToRegularGrid));
   setFilterParameters(parameters);
 }
 
@@ -353,9 +354,9 @@ void InterpolatePointCloudToRegularGrid::dataCheck()
     }
   }
 
-  m_VoxelIndicesPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<size_t>>(this, getVoxelIndicesArrayPath(),
-                                                                                                         cDims);  /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-  if(nullptr != m_VoxelIndicesPtr.lock().get())                                                                   /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+  m_VoxelIndicesPtr =
+      getDataContainerArray()->getPrereqArrayFromPath<DataArray<size_t>>(this, getVoxelIndicesArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+  if(nullptr != m_VoxelIndicesPtr.lock().get())                                                                    /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
   {
     m_VoxelIndices = m_VoxelIndicesPtr.lock()->getPointer(0);
   } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -366,9 +367,8 @@ void InterpolatePointCloudToRegularGrid::dataCheck()
 
   if(getUseMask())
   {
-    m_MaskPtr =
-        getDataContainerArray()->getPrereqArrayFromPath<DataArray<bool>>(this, getMaskArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
-    if(nullptr != m_MaskPtr.lock().get()) /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
+    m_MaskPtr = getDataContainerArray()->getPrereqArrayFromPath<DataArray<bool>>(this, getMaskArrayPath(), cDims); /* Assigns the shared_ptr<> to an instance variable that is a weak_ptr<> */
+    if(nullptr != m_MaskPtr.lock().get())                                                                          /* Validate the Weak Pointer wraps a non-nullptr pointer to a DataArray<T> object */
     {
       m_Mask = m_MaskPtr.lock()->getPointer(0);
     } /* Now assign the raw pointer to data from the DataArray<T> object */
@@ -387,7 +387,6 @@ void InterpolatePointCloudToRegularGrid::dataCheck()
 
   getDataContainerArray()->validateNumberOfTuples(this, dataArrays);
 }
-
 
 // -----------------------------------------------------------------------------
 //
