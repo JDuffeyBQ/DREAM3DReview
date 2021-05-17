@@ -2,14 +2,13 @@
 Pipeline example based on 04_Steiner Compact in Anisotropy examples
 '''
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import orientationanalysispy
+from dream3d import dream3dreviewpy
+from dream3d import reconstructionpy
+from dream3d import processingpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import orientationanalysispy
-import dream3dreviewpy
-import reconstructionpy
-import processingpy
 
 def start_test():
     # Create Data Container Array

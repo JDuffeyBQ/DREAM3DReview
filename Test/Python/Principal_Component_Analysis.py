@@ -2,13 +2,13 @@
 # Tests the Principal Component Analysis filter
 #
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import orientationanalysispy
+from dream3d import surfacemeshingpy
+from dream3d import dream3dreviewpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import orientationanalysispy
-import surfacemeshingpy
-import dream3dreviewpy
 
 def start_test():
     # Create Data Container Array

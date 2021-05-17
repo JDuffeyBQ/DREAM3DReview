@@ -2,14 +2,13 @@
 Pipeline example based on 03_Adaptive Alignment - Mutual Information - SEM Images in Anisotropy examples
 '''
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import orientationanalysispy
+from dream3d import dream3dreviewpy
+from dream3d import itkimageprocessing
+from dream3d import itkimageprocessingpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import orientationanalysispy
-import dream3dreviewpy
-import itkimageprocessing
-import itkimageprocessingpy
 
 def start_test():
     # Create Data Container Array

@@ -2,13 +2,13 @@
 # Tests the Potts Model filter
 # NOTE: The Potts Model takes several minutes to run on this pipeline
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import samplingpy
+from dream3d import surfacemeshingpy
+from dream3d import dream3dreviewpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import samplingpy
-import surfacemeshingpy
-import dream3dreviewpy
 
 def start_test():
     # Create Data Container Array

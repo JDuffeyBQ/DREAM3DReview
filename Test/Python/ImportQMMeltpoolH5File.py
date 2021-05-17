@@ -2,11 +2,10 @@
 
 # These are the simpl_py python modules
 import os
-import simpl
-import simplpy
-import simpl_helpers as sh
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import dream3dreviewpy
 import simpl_test_dirs as sd
-import dream3dreviewpy
 
 MELTPOOL_DATACONTAINER_NAME = "MeltPool Data"
 VERTEX_ATTRIBUTE_MATRIX_NAME = "Vertex Data"

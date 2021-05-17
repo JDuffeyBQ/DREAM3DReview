@@ -2,11 +2,11 @@
 # Tests the Remove Flagged Vertices filter
 # These are the simpl_py python modules
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import dream3dreviewpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import dream3dreviewpy
 
 def start_test():
     # Create Data Container Array

@@ -2,11 +2,9 @@
 Pipeline example based on 01_Import Data in Anisotropy examples
 '''
 
-import simpl
-import simplpy
-import simpl_helpers as sh
+from dream3d import simpl
+from dream3d import orientationanalysispy
 import simpl_test_dirs as sd
-import orientationanalysispy
 
 def start_test():
     # Create Data Container Array

@@ -2,13 +2,13 @@
 # Tests the Extract Internal Surfaces From Triangle Geometry filter
 #
 import os
-import simpl
-import simplpy
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import surfacemeshingpy
+from dream3d import dream3dreviewpy
+from dream3d import samplingpy as sampling
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import samplingpy as sampling
-import surfacemeshingpy
-import dream3dreviewpy
 
 def start_test():
     # Create Data Container Array

@@ -1,15 +1,15 @@
 # Insert Transformation Phase
 # Based on InsertTransformationPhase example pipeline
 import os
-import simpl
+from dream3d import simpl
+from dream3d import simplpy
+from dream3d import orientationanalysispy
+from dream3d import genericpy
+from dream3d import statisticspy
+from dream3d import syntheticbuildingpy as syntheticbuilding
+from dream3d import dream3dreviewpy
 import simpl_helpers as sh
 import simpl_test_dirs as sd
-import simplpy
-import orientationanalysispy
-import genericpy
-import statisticspy
-import syntheticbuildingpy as syntheticbuilding
-import dream3dreviewpy
 
 def start_test():
     # Create Data Container Array
